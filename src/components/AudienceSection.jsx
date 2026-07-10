@@ -8,6 +8,7 @@ export default function AudienceSection() {
   const bannersRef = useRef([]);
   const descriptionsRef = useRef([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const activeIndexRef = useRef(0); // Ref para evitar closures obsoletos en los handlers
 
   // Utilizamos refs para mantener el estado de la animación (Lerp) sin re-renderizar React
   const currentSizes = useRef([]);
@@ -72,7 +73,8 @@ export default function AudienceSection() {
       };
     });
 
-    if (closestIndex !== activeIndex) {
+    if (closestIndex !== activeIndexRef.current) {
+      activeIndexRef.current = closestIndex;
       setActiveIndex(closestIndex);
     }
   };
@@ -167,15 +169,16 @@ export default function AudienceSection() {
   };
 
   const scrollNext = () => {
-    if (scrollRef.current) {
-      smoothScrollTo(scrollRef.current.scrollLeft + 1175, 1200); // 1200ms = Muy lento y sutil
-    }
+    if (!scrollRef.current) return;
+    // Usamos el índice exacto para evitar acumulación de errores de punto flotante
+    const nextIndex = Math.min(activeIndexRef.current + 1, slides.length - 1);
+    smoothScrollTo(nextIndex * 1175, 1200);
   };
 
   const scrollPrev = () => {
-    if (scrollRef.current) {
-      smoothScrollTo(scrollRef.current.scrollLeft - 1175, 1200);
-    }
+    if (!scrollRef.current) return;
+    const prevIndex = Math.max(activeIndexRef.current - 1, 0);
+    smoothScrollTo(prevIndex * 1175, 1200);
   };
 
   const slides = [
