@@ -49,10 +49,10 @@ export default function EjesFormativosSection() {
   }, []);
 
   return (
-    <section className="max-w-[1920px] mb-[200px] mx-auto px-6 py-16 text-center overflow-hidden bg-[#f8f9fa]">
-      <h2 className="text-[48px] font-bold text-gray-900 mb-4">Nuestros Ejes Formativos</h2>
-      <p className="text-gray-600 max-w-full mx-auto mb-12 text-[25px] leading-snug">
-        Descubre los diez pilares que orientan nuestro modelo educativo y forman profesionales íntegros, preparados para afrontar los <br />
+    <section className="w-full max-w-[1920px] mb-[100px] lg:mb-[200px] mx-auto px-6 py-12 lg:py-16 text-center overflow-hidden bg-[#f8f9fa]">
+      <h2 className="text-[32px] md:text-[48px] font-bold text-gray-900 mb-4">Nuestros Ejes Formativos</h2>
+      <p className="text-gray-600 max-w-full mx-auto mb-12 text-[18px] md:text-[25px] leading-snug">
+        Descubre los diez pilares que orientan nuestro modelo educativo y forman profesionales íntegros, preparados para afrontar los <br className="hidden md:block" />
         retos del futuro laboral.
       </p>
 
@@ -74,9 +74,9 @@ export default function EjesFormativosSection() {
           {items.map((eje, index) => (
             <div
               key={index}
-              className="w-[320px] h-[200px] bg-gray-100 rounded-2xl hover:bg-gray-200 hover:-translate-y-2 transition-all duration-300 cursor-pointer flex items-center justify-center p-6 shrink-0 shadow-sm"
+              className="w-[240px] md:w-[320px] h-[150px] md:h-[200px] bg-gray-100 rounded-2xl hover:bg-gray-200 hover:-translate-y-2 transition-all duration-300 cursor-pointer flex items-center justify-center p-6 shrink-0 shadow-sm"
             >
-              <h3 className="font-bold text-gray-900 text-[22px] leading-tight">{eje}</h3>
+              <h3 className="font-bold text-gray-900 text-[18px] md:text-[22px] leading-tight">{eje}</h3>
             </div>
           ))}
         </div>

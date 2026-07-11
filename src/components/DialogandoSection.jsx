@@ -40,15 +40,15 @@ export default function DialogandoSection({ news = [] }) {
   const secondaryArticles = articles.slice(1, 4);
 
   return (
-    <section className="max-w-[1680px] mx-auto px-6 pt-24 mb-[200px] mt-[200px]">
-      <h2 className="text-[44px] font-bold text-[#05162D] mb-10">Dialogando</h2>
+    <section className="max-w-[1680px] mx-auto px-6 pt-16 lg:pt-24 mb-[100px] lg:mb-[200px] mt-[100px] lg:mt-[200px]">
+      <h2 className="text-[32px] md:text-[44px] font-bold text-[#05162D] mb-10">Dialogando</h2>
       
-      <div className="flex flex-row gap-6 items-start">
+      <div className="flex flex-col xl:flex-row gap-10 xl:gap-6 items-start">
         
         {/* Main Article (Left) */}
         {mainArticle && (
-          <div className="flex flex-col gap-6 w-[970px] shrink-0">
-            <div className="w-[970px] h-[490px] bg-gray-200 rounded-2xl overflow-hidden relative">
+          <div className="flex flex-col gap-6 w-full xl:w-[970px] shrink-0">
+            <div className="w-full xl:w-[970px] h-[300px] md:h-[490px] bg-gray-200 rounded-2xl overflow-hidden relative">
               <img 
                 src={mainArticle.image} 
                 alt={mainArticle.title}
@@ -73,10 +73,10 @@ export default function DialogandoSection({ news = [] }) {
         )}
 
         {/* Secondary Articles List (Right) */}
-        <div className="flex flex-col gap-6 flex-1 justify-start">
+        <div className="flex flex-col gap-6 flex-1 justify-start w-full">
           {secondaryArticles.map((article) => (
-            <div key={article.id} className="flex gap-6 items-start group cursor-pointer">
-              <div className="w-[260px] h-[235px] bg-gray-200 rounded-xl overflow-hidden shrink-0">
+            <div key={article.id} className="flex flex-col sm:flex-row gap-6 items-start group cursor-pointer w-full">
+              <div className="w-full sm:w-[260px] h-[200px] sm:h-[235px] bg-gray-200 rounded-xl overflow-hidden shrink-0">
                  <img 
                   src={article.image} 
                   alt={article.title}

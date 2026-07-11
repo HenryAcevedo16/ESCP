@@ -170,15 +170,18 @@ export default function AudienceSection() {
 
   const scrollNext = () => {
     if (!scrollRef.current) return;
-    // Usamos el índice exacto para evitar acumulación de errores de punto flotante
+    const isMobile = window.innerWidth < 768;
+    const slideWidth = isMobile ? window.innerWidth : 1175;
     const nextIndex = Math.min(activeIndexRef.current + 1, slides.length - 1);
-    smoothScrollTo(nextIndex * 1175, 1200);
+    smoothScrollTo(nextIndex * slideWidth, 1200);
   };
 
   const scrollPrev = () => {
     if (!scrollRef.current) return;
+    const isMobile = window.innerWidth < 768;
+    const slideWidth = isMobile ? window.innerWidth : 1175;
     const prevIndex = Math.max(activeIndexRef.current - 1, 0);
-    smoothScrollTo(prevIndex * 1175, 1200);
+    smoothScrollTo(prevIndex * slideWidth, 1200);
   };
 
   const slides = [
@@ -222,9 +225,8 @@ export default function AudienceSection() {
         ref={scrollRef}
         onScroll={handleScroll}
         // Eliminamos el gap del contenedor flex, ya que las ranuras (slots) fijas ya incluyen el espacio
-        className="flex overflow-x-auto pb-10 snap-x snap-mandatory items-center [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+        className="flex overflow-x-auto pb-10 snap-x snap-mandatory items-center [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] max-md:!px-4"
         style={{
-          // La ranura fija mide 1175px, la mitad es 587.5px.
           paddingLeft: 'calc(50vw - 587.5px)',
           paddingRight: 'calc(50vw - 587.5px)',
         }}
@@ -233,12 +235,12 @@ export default function AudienceSection() {
           // CONTENEDOR FIJO: Evita que el layout salte (thrashing) durante la animación
           <div 
             key={i} 
-            className="flex items-center justify-center shrink-0 snap-center w-[1175px] h-[700px]"
+            className="flex items-center justify-center shrink-0 snap-center w-[1175px] h-[700px] max-md:!w-[100vw] max-md:!h-[500px]"
           >
             {/* TARJETA ANIMADA: Cambia de tamaño libremente dentro de su contenedor fijo */}
             <div 
               ref={el => cardsRef.current[i] = el}
-              className="relative rounded-[40px] overflow-hidden shadow-xl origin-center will-change-[width,height,opacity]"
+              className="relative rounded-[40px] overflow-hidden shadow-xl origin-center will-change-[width,height,opacity] max-md:!w-[90vw] max-md:!h-[450px]"
               style={{
                 width: i === 0 ? '1218px' : '1051px',
                 height: i === 0 ? '663px' : '571px',
@@ -252,8 +254,8 @@ export default function AudienceSection() {
               <div className="absolute inset-0 bg-black/50"></div>
 
               {slide.type === "title" ? (
-                <div className="absolute inset-0 flex items-center justify-center p-10">
-                  <h2 className="text-[65px] font-bold text-white leading-tight text-center drop-shadow-lg">
+                <div className="absolute inset-0 flex items-center justify-center p-6 md:p-10">
+                  <h2 className="text-[36px] md:text-[65px] font-bold text-white leading-tight text-center drop-shadow-lg">
                     ¿A quién está dirigida<br />la Escuela?
                   </h2>
                 </div>
@@ -261,20 +263,20 @@ export default function AudienceSection() {
                 <>
                   <div 
                     ref={el => bannersRef.current[i] = el}
-                    className="absolute bottom-8 left-8 bg-[#05162D] p-10 rounded-[32px] flex gap-8 items-start shadow-2xl will-change-[width,height]"
+                    className="absolute bottom-6 left-6 md:bottom-8 md:left-8 bg-[#05162D] p-6 md:p-10 rounded-[24px] md:rounded-[32px] flex flex-col md:flex-row gap-4 md:gap-8 items-start shadow-2xl will-change-[width,height] max-md:!w-[calc(100%-3rem)] max-md:!h-auto"
                     style={{
                       width: i === 0 ? '882px' : '715px',
                       height: i === 0 ? '278px' : '140px',
                     }}
                   >
-                    <div className="bg-white text-black w-[70px] h-[70px] rounded-full flex items-center justify-center font-bold text-3xl shrink-0">
+                    <div className="bg-white text-black w-[50px] h-[50px] md:w-[70px] md:h-[70px] rounded-full flex items-center justify-center font-bold text-xl md:text-3xl shrink-0">
                       {slide.number}
                     </div>
                     <div>
-                      <h3 className="text-white font-bold text-[32px] leading-tight">{slide.title}</h3>
+                      <h3 className="text-white font-bold text-[22px] md:text-[32px] leading-tight mb-2 md:mb-0">{slide.title}</h3>
                       <p 
                         ref={el => descriptionsRef.current[i] = el}
-                        className="text-gray-300 text-[18px] line-clamp-1 overflow-hidden will-change-[height,opacity,margin]"
+                        className="text-gray-300 text-[14px] md:text-[18px] line-clamp-2 md:line-clamp-1 overflow-hidden will-change-[height,opacity,margin] max-md:!h-auto max-md:!opacity-100 max-md:!mt-0"
                         style={{
                           opacity: i === 0 ? 1 : 0,
                           height: i === 0 ? '28px' : '0px',
@@ -305,7 +307,9 @@ export default function AudienceSection() {
               key={i} 
               onClick={() => {
                 if (scrollRef.current) {
-                  const scrollPos = i === 0 ? 0 : (i * 1175);
+                  const isMobile = window.innerWidth < 768;
+                  const slideWidth = isMobile ? window.innerWidth : 1175;
+                  const scrollPos = i === 0 ? 0 : (i * slideWidth);
                   scrollRef.current.scrollTo({ left: scrollPos, behavior: 'smooth' });
                 }
               }}
