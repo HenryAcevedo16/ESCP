@@ -44,7 +44,7 @@ export default function Navbar() {
             <span>Programas</span>
             <ChevronDown size={isScrolled ? 16 : 20} className="transition-all duration-300" />
           </div>
-          <Link href="#" className="hover:text-blue-200 transition">Articulando</Link>
+          <Link href="/articulando" className="hover:text-blue-200 transition">Articulando</Link>
           <Link href="/contacto" className="hover:text-blue-200 transition">Contacto</Link>
         </div>
 
@@ -83,7 +83,7 @@ export default function Navbar() {
           <span>Programas</span>
           <ChevronDown size={24} />
         </div>
-        <Link href="#" onClick={() => setIsMenuOpen(false)} className="text-2xl font-medium hover:text-blue-300 transition">Articulando</Link>
+        <Link href="/articulando" onClick={() => setIsMenuOpen(false)} className="text-2xl font-medium hover:text-blue-300 transition">Articulando</Link>
         <Link href="/contacto" onClick={() => setIsMenuOpen(false)} className="text-2xl font-medium hover:text-blue-300 transition">Contacto</Link>
         <button className="mt-8 bg-primary hover:bg-primary-dark text-white rounded-full font-medium h-[60px] px-10 text-[20px] transition-all">
           Suscríbete

@@ -55,7 +55,7 @@ export default function HeroSection({
 
       {/* Floating Bottom Card / Cutout - Smooth Fluid Shape */}
       <div 
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full md:w-[90%] max-w-4xl h-auto md:h-28 bg-white z-20 flex flex-col md:flex-row items-center justify-around py-4 md:py-6 px-4 gap-2 md:gap-0 rounded-t-[32px] md:rounded-t-[56px] shadow-lg"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full md:w-[90%] max-w-4xl h-auto md:h-28 bg-white z-20 flex flex-col md:flex-row items-center justify-around py-4 md:py-6 px-4 gap-2 md:gap-0 rounded-t-[32px] md:rounded-t-[56px]"
       >
         
         {/* Left Inverted Corner */}
@@ -85,11 +85,9 @@ export default function HeroSection({
         <div className="text-center w-full">
           <p className="font-bold text-gray-900 text-sm md:text-lg">10 ejes formativos</p>
         </div>
-        <div className="w-px h-12 bg-gray-200 hidden md:block"></div>
         <div className="text-center w-full">
           <p className="font-bold text-gray-900 text-sm md:text-lg">8 modalidades</p>
         </div>
-        <div className="w-px h-12 bg-gray-200 hidden md:block"></div>
         <div className="text-center w-full">
           <p className="font-bold text-gray-900 text-sm md:text-lg">14 líneas sectoriales</p>
         </div>

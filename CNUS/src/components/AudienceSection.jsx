@@ -134,6 +134,8 @@ export default function AudienceSection() {
     };
   }, []);
 
+  const scrollRafId = useRef(null);
+
   // SCROLL PERSONALIZADO PARA CONTROLAR LA VELOCIDAD DE TRANSICIÓN ENTRE SLIDES
   const smoothScrollTo = (targetLeft, duration = 1000) => {
     if (!scrollRef.current) return;
@@ -141,6 +143,10 @@ export default function AudienceSection() {
     const startLeft = container.scrollLeft;
     const distance = targetLeft - startLeft;
     let startTime = null;
+
+    if (scrollRafId.current) {
+      cancelAnimationFrame(scrollRafId.current);
+    }
 
     // Quitamos temporalmente el snap obligatorio para que no pelee con nuestra animación
     container.style.scrollSnapType = 'none';
@@ -158,14 +164,15 @@ export default function AudienceSection() {
       container.scrollLeft = startLeft + distance * ease;
       
       if (timeElapsed < duration) {
-        requestAnimationFrame(animation);
+        scrollRafId.current = requestAnimationFrame(animation);
       } else {
         // Restauramos el snap al finalizar
         container.style.scrollSnapType = 'x mandatory';
+        scrollRafId.current = null;
       }
     };
     
-    requestAnimationFrame(animation);
+    scrollRafId.current = requestAnimationFrame(animation);
   };
 
   const scrollNext = () => {
@@ -310,7 +317,7 @@ export default function AudienceSection() {
                   const isMobile = window.innerWidth < 768;
                   const slideWidth = isMobile ? window.innerWidth : 1175;
                   const scrollPos = i === 0 ? 0 : (i * slideWidth);
-                  scrollRef.current.scrollTo({ left: scrollPos, behavior: 'smooth' });
+                  smoothScrollTo(scrollPos, 1200);
                 }
               }}
               className={`h-3 rounded-full cursor-pointer transition-all duration-500 ${activeIndex === i ? 'w-10 bg-[#05162D]' : 'w-3 bg-gray-300'}`}
