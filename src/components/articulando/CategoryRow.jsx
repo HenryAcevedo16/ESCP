@@ -10,28 +10,28 @@ export default function CategoryRow({ sectionTitle, categoryArticles, bgColor = 
       image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop",
       tag: "Categoría",
       title: "ESCP inicia nuevo Diplomado en Liderazgo Sindical y Acción Sociopolítica",
-      slug: "#"
+      slug: "ejemplo-articulo"
     },
     {
       id: 2,
       image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070&auto=format&fit=crop",
       tag: "Categoría",
       title: "ESCP inicia nuevo Diplomado en Liderazgo Sindical y Acción Sociopolítica",
-      slug: "#"
+      slug: "ejemplo-articulo"
     },
     {
       id: 3,
       image: "https://images.unsplash.com/photo-1556761175-5973dc0f32d7?q=80&w=1932&auto=format&fit=crop",
       tag: "Categoría",
       title: "ESCP inicia nuevo Diplomado en Liderazgo Sindical y Acción Sociopolítica",
-      slug: "#"
+      slug: "ejemplo-articulo"
     },
     {
       id: 4,
       image: "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=1974&auto=format&fit=crop",
       tag: "Categoría",
       title: "ESCP inicia nuevo Diplomado en Liderazgo Sindical y Acción Sociopolítica",
-      slug: "#"
+      slug: "ejemplo-articulo"
     }
   ];
 

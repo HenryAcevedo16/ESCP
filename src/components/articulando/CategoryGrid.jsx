@@ -8,7 +8,7 @@ export default function CategoryGrid({ sectionTitle, mainArticle, secondaryArtic
     tag: "Categoría",
     title: "ESCP inicia nuevo Diplomado en Liderazgo Sindical y Acción Sociopolítica",
     date: "12 Oct 2026",
-    slug: "#"
+    slug: "ejemplo-articulo"
   };
 
   const defaultSecondaryArticles = secondaryArticles || [
@@ -18,7 +18,7 @@ export default function CategoryGrid({ sectionTitle, mainArticle, secondaryArtic
       tag: "Categoría",
       title: "ESCP inicia nuevo Diplomado en Liderazgo Sindical y Acción Sociopolítica",
       date: "12 Oct 2026",
-      slug: "#"
+      slug: "ejemplo-articulo"
     },
     {
       id: 3,
@@ -26,7 +26,7 @@ export default function CategoryGrid({ sectionTitle, mainArticle, secondaryArtic
       tag: "Categoría",
       title: "ESCP inicia nuevo Diplomado en Liderazgo Sindical y Acción Sociopolítica",
       date: "12 Oct 2026",
-      slug: "#"
+      slug: "ejemplo-articulo"
     },
     {
       id: 4,
@@ -34,7 +34,7 @@ export default function CategoryGrid({ sectionTitle, mainArticle, secondaryArtic
       tag: "Categoría",
       title: "ESCP inicia nuevo Diplomado en Liderazgo Sindical y Acción Sociopolítica",
       date: "12 Oct 2026",
-      slug: "#"
+      slug: "ejemplo-articulo"
     }
   ];
 
