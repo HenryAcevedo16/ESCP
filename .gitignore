@@ -1,6 +1,9 @@
 # ─── Node modules ─────────────────────────────────────────────────────────────
 node_modules/
 
+# ─── Binarios grandes (no versionar) ─────────────────────────────────────────
+CNUS/cloudflared/cloudflared.exe
+
 # ─── Frontend (cnus) ──────────────────────────────────────────────────────────
 cnus/.next/
 cnus/out/
