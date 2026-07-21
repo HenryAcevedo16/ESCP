@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "debates",
+  "info": {
+    "singularName": "debate",
+    "pluralName": "debates",
+    "displayName": "Debate",
+    "description": "Debate activo en la sección Articulando"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "pregunta": {
+      "type": "string",
+      "required": true
+    },
+    "activo": {
+      "type": "boolean",
+      "default": false
+    },
+    "fecha_cierre": {
+      "type": "date"
+    },
+    "articulo_relacionado": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::articulo.articulo"
+    }
+  }
+}
