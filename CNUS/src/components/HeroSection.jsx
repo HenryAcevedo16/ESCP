@@ -16,9 +16,12 @@ export default function HeroSection({ heroConfig = null }) {
     stat_1,
     stat_2,
     stat_3,
+    poster_media, // imagen estática de portada del video (súbela en Strapi → hero-config)
   } = heroConfig;
 
   const mediaUrl = getStrapiImageUrl(archivo_media) || '/videos/2c23d65f-1858-45d4-910c-139fa94d9e74.mp4';
+  // posterUrl: frame representativo del video (<100 KB WebP/JPG). Se convierte en el nuevo LCP.
+  const posterUrl = getStrapiImageUrl(poster_media) || '/imagenes/hero-poster.jpg';
   const effectiveTipoMedia = archivo_media ? tipo_media : 'video';
 
   // URL del botón: si hay un programa destacado va a su slug, si no usa boton_url o /programas
@@ -33,19 +36,45 @@ export default function HeroSection({ heroConfig = null }) {
 
         {/* Background Media */}
         {effectiveTipoMedia === "video" ? (
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover opacity-60"
-          >
-            <source src={mediaUrl} type="video/mp4" />
-          </video>
+          <>
+            {/*
+              LCP real: imagen estática que el navegador pinta de inmediato.
+              El video se superpone encima cuando termina de cargar (sin salto visual
+              porque comparte el mismo poster).
+            */}
+            <Image
+              src={posterUrl}
+              alt=""
+              aria-hidden="true"
+              fill
+              priority
+              fetchPriority="high"
+              sizes="100vw"
+              className="absolute inset-0 object-cover opacity-60"
+            />
+            {/* preload="none": el navegador NO descarga el MP4 durante la carga inicial */}
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="none"
+              poster={posterUrl}
+              className="absolute inset-0 w-full h-full object-cover opacity-60"
+            >
+              <source src={mediaUrl} type="video/mp4" />
+            </video>
+          </>
         ) : mediaUrl ? (
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-60"
-            style={{ backgroundImage: `url('${mediaUrl}')` }}
+          <Image
+            src={mediaUrl}
+            alt=""
+            aria-hidden="true"
+            fill
+            priority
+            fetchPriority="high"
+            sizes="100vw"
+            className="absolute inset-0 object-cover opacity-60"
           />
         ) : null}
 

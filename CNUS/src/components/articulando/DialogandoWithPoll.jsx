@@ -36,9 +36,9 @@ export default function DialogandoWithPoll({ sectionTitle, mainArticle, debate }
         <h2 className="text-2xl md:text-[44px] font-black text-[#05162D] tracking-[-0.88px]">
           {sectionTitle || "Dialogando"}
         </h2>
-        <button className="text-[#0E52C6] text-base md:text-[20px] font-medium flex items-center gap-2 hover:underline shrink-0 ml-4">
-          Ver todo <ArrowRight size={18} />
-        </button>
+        <Link href="/articulando" className="text-[#0E52C6] text-base md:text-[20px] font-medium flex items-center gap-2 hover:underline shrink-0 ml-4">
+          Ver todo <ArrowRight size={18} aria-hidden="true" />
+        </Link>
       </div>
 
       <div className="flex flex-col xl:flex-row gap-6">
@@ -99,9 +99,9 @@ export default function DialogandoWithPoll({ sectionTitle, mainArticle, debate }
               <span className="text-base md:text-[20px] text-[#05162D] font-normal mb-2">
                 Conoce el debate del momento
               </span>
-              <h3 className="text-2xl md:text-[44px] font-black text-[#05162D] tracking-tight md:tracking-[-0.88px] leading-tight">
+              <h2 className="text-2xl md:text-[44px] font-black text-[#05162D] tracking-tight md:tracking-[-0.88px] leading-tight">
                 {debate.pregunta}
-              </h3>
+              </h2>
             </div>
 
             {!voteSubmitted ? (
@@ -110,6 +110,8 @@ export default function DialogandoWithPoll({ sectionTitle, mainArticle, debate }
                   Respuesta
                 </span>
                 <textarea
+                  id="debate-respuesta"
+                  aria-label={`Tu respuesta al debate: ${debate.pregunta}`}
                   value={respuesta}
                   onChange={(e) => setRespuesta(e.target.value)}
                   className="w-full h-[140px] md:h-[190px] p-4 md:p-[30px] rounded-[16px] md:rounded-[20px] bg-white text-[#05162D] text-sm md:text-[18px] resize-none focus:outline-none focus:ring-2 focus:ring-[#0E52C6] transition mb-6 md:mb-8 border-none placeholder:text-[#A0A4A8]"
@@ -123,9 +125,9 @@ export default function DialogandoWithPoll({ sectionTitle, mainArticle, debate }
                   >
                     {loading ? "Enviando..." : "Enviar"}
                   </button>
-                  <button className="w-full h-[56px] md:h-[69px] border border-[#0E52C6] text-[#0E52C6] bg-transparent font-medium text-base md:text-[20px] rounded-full hover:bg-blue-50 transition-all">
+                  <Link href="/articulando" className="w-full h-[56px] md:h-[69px] border border-[#0E52C6] text-[#0E52C6] bg-transparent font-medium text-base md:text-[20px] rounded-full hover:bg-blue-50 transition-all flex items-center justify-center">
                     Ver todos
-                  </button>
+                  </Link>
                 </div>
               </div>
             ) : (

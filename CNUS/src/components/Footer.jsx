@@ -20,18 +20,18 @@ export default function Footer() {
             escuela CNUS de sindicalismo sociopolitico.
           </p>
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full border border-gray-400 flex items-center justify-center hover:bg-white hover:text-[#0B1426] transition cursor-pointer">
-              <FaWhatsapp size={18} />
-            </div>
-            <div className="w-10 h-10 rounded-full border border-gray-400 flex items-center justify-center hover:bg-white hover:text-[#0B1426] transition cursor-pointer">
-              <FaInstagram size={18} />
-            </div>
-            <div className="w-10 h-10 rounded-full border border-gray-400 flex items-center justify-center hover:bg-white hover:text-[#0B1426] transition cursor-pointer">
-              <FaFacebook size={18} />
-            </div>
-            <div className="w-10 h-10 rounded-full border border-gray-400 flex items-center justify-center hover:bg-white hover:text-[#0B1426] transition cursor-pointer">
-              <FaTwitter size={18} />
-            </div>
+            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="Contáctanos por WhatsApp" className="w-10 h-10 rounded-full border border-gray-400 flex items-center justify-center hover:bg-white hover:text-[#0B1426] transition">
+              <FaWhatsapp size={18} aria-hidden="true" />
+            </a>
+            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Síguenos en Instagram" className="w-10 h-10 rounded-full border border-gray-400 flex items-center justify-center hover:bg-white hover:text-[#0B1426] transition">
+              <FaInstagram size={18} aria-hidden="true" />
+            </a>
+            <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Síguenos en Facebook" className="w-10 h-10 rounded-full border border-gray-400 flex items-center justify-center hover:bg-white hover:text-[#0B1426] transition">
+              <FaFacebook size={18} aria-hidden="true" />
+            </a>
+            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Síguenos en Twitter / X" className="w-10 h-10 rounded-full border border-gray-400 flex items-center justify-center hover:bg-white hover:text-[#0B1426] transition">
+              <FaTwitter size={18} aria-hidden="true" />
+            </a>
           </div>
         </div>
 

@@ -4,9 +4,10 @@ import { getStrapiImageUrl } from "@/lib/strapi";
 
 export default function CourseCard({ titulo, descripcion, modalidad, slug, imagen }) {
   const imagenUrl = getStrapiImageUrl(imagen);
+  const href = slug ? `/programas/${slug}` : "#";
 
   return (
-    <div className="flex flex-col">
+    <Link href={href} className="flex flex-col group" aria-label={`Ver curso: ${titulo}`}>
       {/* Imagen */}
       <div className="w-full aspect-[4/3] bg-gray-200 rounded-2xl mb-4 relative overflow-hidden flex items-end">
         {imagenUrl && (
@@ -14,7 +15,7 @@ export default function CourseCard({ titulo, descripcion, modalidad, slug, image
             src={imagenUrl}
             alt={titulo}
             fill
-            className="object-cover"
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
         )}
         {/* Etiqueta de modalidad */}
@@ -26,7 +27,7 @@ export default function CourseCard({ titulo, descripcion, modalidad, slug, image
       </div>
 
       {/* Contenido */}
-      <h3 className="font-bold text-lg text-[#0a1a3a] mb-2 leading-tight">
+      <h3 className="font-bold text-lg text-[#0a1a3a] mb-2 leading-tight group-hover:text-[#0045A5] transition-colors">
         {titulo}
       </h3>
       {descripcion && (
@@ -36,12 +37,10 @@ export default function CourseCard({ titulo, descripcion, modalidad, slug, image
       )}
 
       {/* Botón */}
-      <Link
-        href={slug ? `/programas/${slug}` : "#"}
-        className="mt-auto w-full bg-primary hover:bg-primary-dark text-white font-semibold py-2.5 rounded-full transition-colors text-sm text-center"
-      >
+      <span className="mt-auto w-full bg-primary group-hover:bg-primary-dark text-white font-semibold py-2.5 rounded-full transition-colors text-sm text-center">
         Ver curso
-      </Link>
-    </div>
+      </span>
+    </Link>
   );
 }
+

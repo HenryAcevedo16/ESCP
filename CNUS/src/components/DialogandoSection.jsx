@@ -48,7 +48,7 @@ export default function DialogandoSection({ articulos = [] }) {
                 </span>
               )}
               {mainArticle.fecha_publicacion && (
-                <span className="text-sm text-gray-400 font-medium">
+                <span className="text-sm text-gray-500 font-medium">
                   {formatDate(mainArticle.fecha_publicacion)}
                 </span>
               )}
@@ -90,7 +90,7 @@ export default function DialogandoSection({ articulos = [] }) {
                       </span>
                     )}
                     {article.fecha_publicacion && (
-                      <span className="text-xs text-gray-400 font-medium">
+                      <span className="text-xs text-gray-500 font-medium">
                         {formatDate(article.fecha_publicacion)}
                       </span>
                     )}

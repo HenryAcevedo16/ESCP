@@ -47,6 +47,21 @@ export async function getProgramasDestacados() {
   );
 }
 
+export async function getProgramaPorSlug(slug) {
+  return fetchStrapi(
+    `programas?filters[slug][$eq]=${encodeURIComponent(slug)}` +
+    `&populate[imagen][populate]=*` +
+    `&populate[eje][populate]=*` +
+    `&populate[instructor][populate][avatar][populate]=*`
+  );
+}
+
+export async function getAllProgramaSlugs() {
+  const data = await fetchStrapi('programas?fields[0]=slug&pagination[pageSize]=1000');
+  if (!Array.isArray(data)) return [];
+  return data.map((item) => ({ slug: item.slug }));
+}
+
 // ─── Artículos ────────────────────────────────────────────────────────────────
 export async function getArticulos(limit = 4) {
   return fetchStrapi(

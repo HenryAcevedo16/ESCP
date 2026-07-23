@@ -15,9 +15,9 @@ export default function CategoryGrid({ sectionTitle, mainArticle, secondaryArtic
         <h2 className="text-2xl md:text-[44px] font-black text-[#05162D] tracking-[-0.88px]">
           {sectionTitle}
         </h2>
-        <a href="#" className="text-[#043F9F] font-semibold hover:underline text-base md:text-[20px] shrink-0 ml-4">
+        <Link href="/articulando" className="text-[#043F9F] font-semibold hover:underline text-base md:text-[20px] shrink-0 ml-4">
           Ver todas →
-        </a>
+        </Link>
       </div>
 
       {/* Layout principal */}

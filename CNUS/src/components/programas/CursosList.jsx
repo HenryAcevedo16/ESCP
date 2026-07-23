@@ -14,14 +14,14 @@ export default function CursosList({ cursos = [] }) {
             placeholder="Buscar..."
             className="w-full pl-4 pr-10 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm"
           />
-          <button className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary">
-            <Search className="w-4 h-4" />
+          <button type="button" aria-label="Buscar cursos" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-primary">
+            <Search className="w-4 h-4" aria-hidden="true" />
           </button>
         </div>
       </div>
 
       {cursos.length === 0 ? (
-        <p className="text-gray-400 text-center py-20">
+        <p className="text-gray-500 text-center py-20">
           No hay cursos disponibles por el momento.
         </p>
       ) : (

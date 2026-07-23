@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 
-export default function Navbar() {
+export default function Navbar({ logoClassName = "" }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -28,7 +28,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center shrink-0">
-            <div className={`relative transition-all duration-300 ${
+            <div className={`relative transition-all duration-300 ${logoClassName} ${
                 isScrolled
                   ? 'w-25 h-11.5 tablet:w-38.25 tablet:h-17.25'
                   : 'w-40 h-18 tablet:w-63.75 tablet:h-29'
@@ -59,7 +59,10 @@ export default function Navbar() {
 
         {/* Action Button & Mobile/Tablet Menu */}
         <div className="flex items-center gap-4">
-          <button className={`hidden desktop:flex items-center justify-center gap-2.5 w-47 bg-primary hover:bg-primary-dark text-[#FFFFFF] rounded-full font-medium transition-all duration-300
+          <button
+            type="button"
+            aria-label="Suscríbete al boletín"
+            className={`hidden desktop:flex items-center justify-center gap-2.5 w-47 bg-primary hover:bg-primary-dark text-[#FFFFFF] rounded-full font-medium transition-all duration-300
             ${isScrolled ? 'h-13.75 text-[16px]' : 'h-17.25 text-[20px]'}`}
           >
             Suscríbete
@@ -95,7 +98,7 @@ export default function Navbar() {
         <Link href="/programas" onClick={() => setIsMenuOpen(false)} className="text-2xl font-medium hover:text-blue-300 transition">Programas</Link>
         <Link href="/articulando" onClick={() => setIsMenuOpen(false)} className="text-2xl font-medium hover:text-blue-300 transition">Articulando</Link>
         <Link href="/contacto" onClick={() => setIsMenuOpen(false)} className="text-2xl font-medium hover:text-blue-300 transition">Contacto</Link>
-        <button className="mt-8 bg-primary hover:bg-primary-dark text-white rounded-full font-medium h-15 px-10 text-[20px] transition-all">
+        <button type="button" aria-label="Suscríbete al boletín" className="mt-8 bg-primary hover:bg-primary-dark text-white rounded-full font-medium h-15 px-10 text-[20px] transition-all">
           Suscríbete
         </button>
       </div>

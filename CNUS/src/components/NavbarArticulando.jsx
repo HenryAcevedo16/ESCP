@@ -64,7 +64,10 @@ export default function NavbarArticulando() {
             <Link href="/articulando" className="hover:text-primary transition whitespace-nowrap">Notas del presidente</Link>
           </div>
 
-          <button className={`hidden desktop:flex items-center justify-center gap-2.5 w-37.5 min-[1610px]:w-47 bg-[#0E52C6] hover:bg-blue-800 text-[#FFFFFF] rounded-full font-medium transition-all duration-300
+          <button
+            type="button"
+            aria-label="Suscríbete al boletín"
+            className={`hidden desktop:flex items-center justify-center gap-2.5 w-37.5 min-[1610px]:w-47 bg-[#0E52C6] hover:bg-blue-800 text-[#FFFFFF] rounded-full font-medium transition-all duration-300
             ${isScrolled ? 'h-12 min-[1610px]:h-13.75 text-[15px] min-[1610px]:text-[16px]' : 'h-13.75 min-[1610px]:h-17.25 text-[16px] min-[1610px]:text-[20px]'}`}
           >
             Suscríbete
@@ -74,6 +77,9 @@ export default function NavbarArticulando() {
           <button 
             className="desktop:hidden z-50 relative ml-4"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation-articulando"
           >
             {isMenuOpen ? (
               <X size={isScrolled ? 28 : 36} className="transition-all duration-300 text-[#05162D]" />
@@ -87,6 +93,7 @@ export default function NavbarArticulando() {
 
       {/* Mobile/Tablet Menu Overlay — hidden at 1200px+ */}
       <div 
+        id="mobile-navigation-articulando"
         className={`fixed inset-0 bg-white text-[#05162D] z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-300 desktop:hidden ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
@@ -101,7 +108,7 @@ export default function NavbarArticulando() {
           <ChevronDown size={24} />
         </div>
         <Link href="/contacto" onClick={() => setIsMenuOpen(false)} className="text-2xl font-medium hover:text-primary transition">Contacto</Link>
-        <button className="mt-8 bg-[#0E52C6] hover:bg-blue-800 text-white rounded-full font-medium h-15 px-10 text-[20px] transition-all">
+        <button type="button" aria-label="Suscríbete al boletín" className="mt-8 bg-[#0E52C6] hover:bg-blue-800 text-white rounded-full font-medium h-15 px-10 text-[20px] transition-all">
           Inscríbete
         </button>
       </div>

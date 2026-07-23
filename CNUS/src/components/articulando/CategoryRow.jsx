@@ -15,9 +15,9 @@ export default function CategoryRow({ sectionTitle, categoryArticles = [], bgCol
           <h2 className="text-2xl md:text-[34px] font-black text-[#05162D] tracking-[-0.88px]">
             {sectionTitle}
           </h2>
-          <button className="text-[#0E52C6] text-sm md:text-[20px] font-medium flex items-center gap-1 md:gap-2 hover:underline shrink-0 ml-4">
-            Ver todo <ArrowRight size={16} />
-          </button>
+          <Link href="/articulando" className="text-[#0E52C6] text-sm md:text-[20px] font-medium flex items-center gap-1 md:gap-2 hover:underline shrink-0 ml-4">
+            Ver todo <ArrowRight size={16} aria-hidden="true" />
+          </Link>
         </div>
 
         {/* Grid de tarjetas */}
