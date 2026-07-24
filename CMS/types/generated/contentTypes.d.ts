@@ -673,6 +673,7 @@ export interface ApiProgramaPrograma extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    contenido_tematico: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -683,6 +684,7 @@ export interface ApiProgramaPrograma extends Struct.CollectionTypeSchema {
       'manyToOne',
       'api::eje-formativo.eje-formativo'
     >;
+    habilidades: Schema.Attribute.Text;
     imagen: Schema.Attribute.Media<'images'>;
     instructor: Schema.Attribute.Relation<'manyToOne', 'api::autor.autor'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;

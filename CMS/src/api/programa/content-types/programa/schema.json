@@ -50,6 +50,12 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::autor.autor"
+    },
+    "contenido_tematico": {
+      "type": "text"
+    },
+    "habilidades": {
+      "type": "text"
     }
   }
 }

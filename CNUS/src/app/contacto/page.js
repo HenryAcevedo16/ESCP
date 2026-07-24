@@ -98,7 +98,7 @@ export default function ContactoPage() {
               <Phone className="text-gray-800 shrink-0" size={24} />
               <div className="flex flex-col">
                 <span className="font-semibold text-gray-900 text-sm">Número de teléfono</span>
-                <span className="text-gray-700 text-sm">809-123-4567</span>
+                <span className="text-gray-700 text-sm">809-221-2158</span>
               </div>
             </div>
 
@@ -116,7 +116,7 @@ export default function ContactoPage() {
               <FaWhatsapp className="text-gray-800 shrink-0" size={24} />
               <div className="flex flex-col">
                 <span className="font-semibold text-gray-900 text-sm">Whatsapp</span>
-                <span className="text-gray-700 text-sm">809-123-4567</span>
+                <span className="text-gray-700 text-sm">809-221-2158</span>
               </div>
             </div>
 
@@ -125,7 +125,9 @@ export default function ContactoPage() {
               <MapPin className="text-gray-800 shrink-0" size={24} />
               <div className="flex flex-col">
                 <span className="font-semibold text-gray-900 text-sm">Dirección</span>
-                <span className="text-gray-700 text-sm leading-tight mt-1">dirección en la que se encuentra</span>
+                <span className="text-gray-700 text-sm leading-tight mt-1">
+                  Calle Juan Erazo No. 14, Edificio Centrales Sindicales, Villa Juana, Santo Domingo, D.N.
+                </span>
               </div>
             </div>
           </div>

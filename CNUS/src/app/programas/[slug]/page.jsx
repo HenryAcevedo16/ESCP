@@ -42,11 +42,12 @@ export default async function ProgramaDetailPage({ params }) {
   const ejeNombre = programa.eje?.nombre ?? null;
   const ejeSlug  = programa.eje?.slug  ?? null;
 
-  // Contenido temático: si el eje tiene descripción la usamos, si no mostramos placeholder
-  const contenidoTematico = programa.eje?.descripcion
-    ? programa.eje.descripcion
-        .split(/\n|\.(?=\s[A-ZÁÉÍÓÚ])/)
-        .map((s) => s.trim().replace(/\.$/, ""))
+  // Contenido temático: prioridad a programa.contenido_tematico, luego eje.descripcion, luego fallback
+  const contenidoTematicoRaw = programa.contenido_tematico || programa.eje?.descripcion;
+  const contenidoTematico = contenidoTematicoRaw
+    ? contenidoTematicoRaw
+        .split(/\n|\r\n|\.(?=\s[A-ZÁÉÍÓÚ])/)
+        .map((s) => s.trim().replace(/^[-•*]\s*/, "").replace(/\.$/, ""))
         .filter(Boolean)
     : [
         "Historia del sindicalismo y su evolución hacia lo sociopolítico",
@@ -61,6 +62,14 @@ export default async function ProgramaDetailPage({ params }) {
         "Comunicación política, campañas sindicales y estrategias de incidencia pública",
         "Estudio de casos de sindicatos con impacto en reformas sociales y políticas",
       ];
+
+  // Habilidades: parseadas desde programa.habilidades
+  const habilidadesList = programa.habilidades
+    ? programa.habilidades
+        .split(/\n|\r\n/)
+        .map((s) => s.trim().replace(/^[-•*]\s*/, ""))
+        .filter(Boolean)
+    : null;
 
   return (
     <main className="flex min-h-screen flex-col w-full bg-white">
@@ -95,6 +104,13 @@ export default async function ProgramaDetailPage({ params }) {
         <h1 className="text-2xl tablet:text-4xl desktop:text-5xl font-bold text-white leading-tight max-w-4xl">
           {programa.titulo}
         </h1>
+
+        {/* Description / Subtitle */}
+        {programa.descripcion && (
+          <p className="text-gray-300 text-base md:text-lg mt-3 max-w-3xl leading-relaxed font-light">
+            {programa.descripcion}
+          </p>
+        )}
 
         {/* Badges */}
         <div className="flex flex-wrap gap-3 mt-6">
@@ -148,6 +164,7 @@ export default async function ProgramaDetailPage({ params }) {
           {/* Tabs */}
           <ProgramaDetailTabs
             descripcion={programa.descripcion}
+            habilidades={habilidadesList}
             instructor={programa.instructor}
             instructorNombre={instructorNombre}
             avatarUrl={avatarUrl}

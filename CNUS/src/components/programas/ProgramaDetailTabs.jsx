@@ -9,11 +9,27 @@ const TABS = [
 
 export default function ProgramaDetailTabs({
   descripcion,
+  habilidades,
   instructor,
   instructorNombre,
   avatarUrl,
 }) {
   const [activeTab, setActiveTab] = useState("curso");
+
+  const habilidadesRender = habilidades && habilidades.length > 0
+    ? habilidades
+    : [
+        "Análisis político y socioeconómico",
+        "Negociación colectiva",
+        "Elaboración de propuestas de política",
+        "Comunicación estratégica sindical",
+        "Gestión del diálogo social",
+        "Liderazgo y representación sindical",
+        "Incidencia en políticas públicas",
+        "Perspectiva de género en el sindicalismo",
+        "Organización de campañas sindicales",
+        "Lectura del entorno laboral y político",
+      ];
 
   return (
     <div className="w-full">
@@ -50,7 +66,7 @@ export default function ProgramaDetailTabs({
           <div className="flex flex-col gap-8">
             {/* Descripción */}
             {descripcion ? (
-              <p className="text-[#05162D] text-[16px] leading-[1.8] tracking-[-0.01em] font-light">
+              <p className="text-[#05162D] text-[16px] leading-[1.8] tracking-[-0.01em] font-light whitespace-pre-line">
                 {descripcion}
               </p>
             ) : (
@@ -59,24 +75,13 @@ export default function ProgramaDetailTabs({
               </p>
             )}
 
-            {/* Habilidades placeholder */}
+            {/* Habilidades */}
             <div>
               <h3 className="text-lg font-bold text-[#05162D] mb-4">
                 Habilidades que dominarás
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-2">
-                {[
-                  "Análisis político y socioeconómico",
-                  "Negociación colectiva",
-                  "Elaboración de propuestas de política",
-                  "Comunicación estratégica sindical",
-                  "Gestión del diálogo social",
-                  "Liderazgo y representación sindical",
-                  "Incidencia en políticas públicas",
-                  "Perspectiva de género en el sindicalismo",
-                  "Organización de campañas sindicales",
-                  "Lectura del entorno laboral y político",
-                ].map((habilidad, i) => (
+                {habilidadesRender.map((habilidad, i) => (
                   <div key={i} className="flex items-center gap-2 py-1">
                     <svg
                       className="w-4 h-4 text-[#0045A5] shrink-0"

@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    unoptimized: true,
     remotePatterns: [
       // Strapi local (desarrollo)
       {
@@ -9,12 +10,18 @@ const nextConfig = {
         port: '1337',
         pathname: '/uploads/**',
       },
-      // Cloudinary (producción — agregar cuando esté lista la cuenta)
+      {
+        protocol: 'http',
+        hostname: '127.0.0.1',
+        port: '1337',
+        pathname: '/uploads/**',
+      },
+      // Cloudinary (producción)
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
       },
-      // Unsplash (para imágenes de referencia durante desarrollo)
+      // Unsplash
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',

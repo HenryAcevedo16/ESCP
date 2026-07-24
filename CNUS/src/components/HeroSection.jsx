@@ -19,10 +19,12 @@ export default function HeroSection({ heroConfig = null }) {
     poster_media, // imagen estática de portada del video (súbela en Strapi → hero-config)
   } = heroConfig;
 
-  const mediaUrl = getStrapiImageUrl(archivo_media) || '/videos/2c23d65f-1858-45d4-910c-139fa94d9e74.mp4';
-  // posterUrl: frame representativo del video (<100 KB WebP/JPG). Se convierte en el nuevo LCP.
-  const posterUrl = getStrapiImageUrl(poster_media) || '/imagenes/hero-poster.jpg';
-  const effectiveTipoMedia = archivo_media ? tipo_media : 'video';
+  const mediaUrl = getStrapiImageUrl(archivo_media);
+  const posterUrl = getStrapiImageUrl(poster_media);
+
+  const mimeType = archivo_media?.mime || archivo_media?.attributes?.mime || '';
+  const isVideo = mimeType.startsWith('video') || (mediaUrl && mediaUrl.endsWith('.mp4'));
+  const effectiveTipoMedia = tipo_media || (isVideo ? 'video' : 'imagen');
 
   // URL del botón: si hay un programa destacado va a su slug, si no usa boton_url o /programas
   const btnHref = programa_destacado?.slug
@@ -35,31 +37,27 @@ export default function HeroSection({ heroConfig = null }) {
       <div className="relative w-full h-[80dvh] min-h-[500px] tablet:h-[100dvh] tablet:min-h-[600px] bg-slate-800 flex flex-col justify-between overflow-hidden">
 
         {/* Background Media */}
-        {effectiveTipoMedia === "video" ? (
+        {effectiveTipoMedia === "video" && mediaUrl ? (
           <>
-            {/*
-              LCP real: imagen estática que el navegador pinta de inmediato.
-              El video se superpone encima cuando termina de cargar (sin salto visual
-              porque comparte el mismo poster).
-            */}
-            <Image
-              src={posterUrl}
-              alt=""
-              aria-hidden="true"
-              fill
-              priority
-              fetchPriority="high"
-              sizes="100vw"
-              className="absolute inset-0 object-cover opacity-60"
-            />
-            {/* preload="none": el navegador NO descarga el MP4 durante la carga inicial */}
+            {posterUrl && (
+              <Image
+                src={posterUrl}
+                alt=""
+                aria-hidden="true"
+                fill
+                priority
+                fetchPriority="high"
+                sizes="100vw"
+                className="absolute inset-0 object-cover opacity-60"
+              />
+            )}
             <video
               autoPlay
               loop
               muted
               playsInline
               preload="none"
-              poster={posterUrl}
+              {...(posterUrl && { poster: posterUrl })}
               className="absolute inset-0 w-full h-full object-cover opacity-60"
             >
               <source src={mediaUrl} type="video/mp4" />
@@ -76,7 +74,17 @@ export default function HeroSection({ heroConfig = null }) {
             sizes="100vw"
             className="absolute inset-0 object-cover opacity-60"
           />
-        ) : null}
+        ) : (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-60"
+          >
+            <source src="/videos/2c23d65f-1858-45d4-910c-139fa94d9e74.mp4" type="video/mp4" />
+          </video>
+        )}
 
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/30" />
