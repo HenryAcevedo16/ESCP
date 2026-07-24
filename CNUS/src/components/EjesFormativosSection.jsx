@@ -34,11 +34,11 @@ export default function EjesFormativosSection({ ejes = [] }) {
   if (ejes.length === 0) return null;
 
   return (
-    <section className="w-full max-w-[1920px] mb-[100px] desktop:mb-[200px] mx-auto px-4 tablet:px-[60px] desktop:px-6 py-12 tablet:py-16 text-center overflow-hidden bg-[#f8f9fa]">
-      <h2 className="text-[32px] tablet:text-[48px] font-bold text-gray-900 mb-4">
+    <section className="w-full max-w-[1920px] mb-[100px] min-[1200px]:max-[1609px]:mb-[200px] desktop:mb-[200px] mx-auto px-4 tablet:px-[60px] desktop:px-6 py-12 tablet:py-16 min-[1200px]:max-[1609px]:py-16 text-center overflow-hidden bg-[#f8f9fa]">
+      <h2 className="text-[32px] tablet:text-[48px] min-[1200px]:max-[1609px]:text-3xl font-bold text-gray-900 mb-4">
         Nuestros Ejes Formativos
       </h2>
-      <p className="text-gray-600 max-w-full mx-auto mb-12 text-[18px] tablet:text-[25px] leading-snug">
+      <p className="text-gray-600 max-w-full mx-auto mb-12 text-[18px] tablet:text-[25px] min-[1200px]:max-[1609px]:text-[18px] leading-snug">
         Descubre los pilares que orientan nuestro modelo educativo y forman profesionales íntegros,
         preparados para afrontar los{" "}
         <br className="hidden tablet:block" />

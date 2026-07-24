@@ -139,19 +139,19 @@ export default function HeroSection({ heroConfig = null }) {
           />
           {stat_1 && (
             <div className="text-center flex-1">
-              <p className="font-bold text-gray-900 text-xs sm:text-sm tablet:text-lg">{stat_1}</p>
+              <p className="font-bold text-gray-900 text-xs sm:text-sm tablet:text-lg min-[1200px]:max-[1609px]:text-[18px]! min-[1610px]:text-[20px]!">{stat_1}</p>
             </div>
           )}
-          {stat_1 && stat_2 && <div className="w-px h-6 bg-gray-200 shrink-0" />}
+          {stat_1 && stat_2 && <div className="w-px h-6 min-[1200px]:max-[1609px]:h-8 bg-gray-200 shrink-0" />}
           {stat_2 && (
             <div className="text-center flex-1">
-              <p className="font-bold text-gray-900 text-xs sm:text-sm tablet:text-lg">{stat_2}</p>
+              <p className="font-bold text-gray-900 text-xs sm:text-sm tablet:text-lg min-[1200px]:max-[1609px]:text-[18px]! min-[1610px]:text-[20px]!">{stat_2}</p>
             </div>
           )}
-          {stat_2 && stat_3 && <div className="w-px h-6 bg-gray-200 shrink-0" />}
+          {stat_2 && stat_3 && <div className="w-px h-6 min-[1200px]:max-[1609px]:h-8 bg-gray-200 shrink-0" />}
           {stat_3 && (
             <div className="text-center flex-1">
-              <p className="font-bold text-gray-900 text-xs sm:text-sm tablet:text-lg">{stat_3}</p>
+              <p className="font-bold text-gray-900 text-xs sm:text-sm tablet:text-lg min-[1200px]:max-[1609px]:text-[18px]! min-[1610px]:text-[20px]!">{stat_3}</p>
             </div>
           )}
         </div>

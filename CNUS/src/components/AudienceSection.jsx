@@ -13,20 +13,60 @@ const createInitialSizes = () => Array.from({ length: 5 }, (_, index) => ({
   descMargin: index === 0 ? 8 : 0,
 }));
 
+const computeDims = () => {
+  if (typeof window === "undefined") {
+    return {
+      activeW: 1218, inactiveW: 1051, activeH: 663, inactiveH: 571,
+      maxDistance: 1175, activeBannerW: 882, inactiveBannerW: 715,
+      activeBannerH: 278, inactiveBannerH: 140, pad: 587.5
+    };
+  }
+  const vw = window.innerWidth;
+  if (vw < 1200 || vw >= 1610) {
+    return {
+      activeW: 1218, inactiveW: 1051, activeH: 663, inactiveH: 571,
+      maxDistance: 1175, activeBannerW: 882, inactiveBannerW: 715,
+      activeBannerH: 278, inactiveBannerH: 140, pad: 587.5
+    };
+  }
+  const activeW = Math.min(1218, Math.max(900, vw - 160));
+  const scale = activeW / 1218;
+  return {
+    activeW,
+    inactiveW: 1051 * scale,
+    activeH: 663 * scale,
+    inactiveH: 571 * scale,
+    maxDistance: activeW - 43,
+    activeBannerW: 882 * scale,
+    inactiveBannerW: 715 * scale,
+    activeBannerH: 278 * scale,
+    inactiveBannerH: 140 * scale,
+    pad: activeW / 2
+  };
+};
+
 export default function AudienceSection() {
   const scrollRef = useRef(null);
   const cardsRef = useRef([]);
   const bannersRef = useRef([]);
   const descriptionsRef = useRef([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeIndexRef = useRef(0); // Ref para evitar closures obsoletos en los handlers
+  const activeIndexRef = useRef(0);
 
-  // Utilizamos refs para mantener el estado de la animación (Lerp) sin re-renderizar React
+  const dimsRef = useRef(computeDims());
+
+  useEffect(() => {
+    const handleResize = () => {
+      dimsRef.current = computeDims();
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const currentSizes = useRef(createInitialSizes());
   const targetSizes = useRef(createInitialSizes());
   const rafId = useRef(null);
 
-  // Calculamos los "objetivos" matemáticos basados en el scroll actual
   const updateTargets = () => {
     if (!scrollRef.current) return;
     const container = scrollRef.current;
@@ -39,6 +79,12 @@ export default function AudienceSection() {
     let closestIndex = 0;
     let minDistance = Infinity;
 
+    const {
+      activeW, inactiveW, activeH, inactiveH,
+      maxDistance, activeBannerW, inactiveBannerW,
+      activeBannerH, inactiveBannerH
+    } = dimsRef.current;
+
     rects.forEach((cardRect, index) => {
       if (!cardRect) return;
       const card = cardsRef.current[index];
@@ -50,19 +96,15 @@ export default function AudienceSection() {
         closestIndex = index;
       }
 
-      // 1175px es la nueva distancia entre centros calculando el gap de 40px
-      const maxDistance = 1175; 
       const progress = 1 - Math.min(distance / maxDistance, 1);
-      
-      // Curva Ease-Out: Crece muy rápido tan pronto como empieza a acercarse al centro
       const easeProgress = 1 - Math.pow(1 - progress, 3);
       
       targetSizes.current[index] = {
-        width: 1051 + (1218 - 1051) * easeProgress,
-        height: 571 + (663 - 571) * easeProgress,
+        width: inactiveW + (activeW - inactiveW) * easeProgress,
+        height: inactiveH + (activeH - inactiveH) * easeProgress,
         opacity: 0.5 + 0.5 * easeProgress,
-        bannerWidth: 715 + (882 - 715) * easeProgress,
-        bannerHeight: 140 + (278 - 140) * easeProgress,
+        bannerWidth: inactiveBannerW + (activeBannerW - inactiveBannerW) * easeProgress,
+        bannerHeight: inactiveBannerH + (activeBannerH - inactiveBannerH) * easeProgress,
         descOpacity: easeProgress,
         descHeight: 28 * easeProgress,
         descMargin: 8 * easeProgress
@@ -176,17 +218,17 @@ export default function AudienceSection() {
   const scrollNext = () => {
     if (!scrollRef.current) return;
     const isTabletOrSmaller = window.innerWidth < 1200;
-    const slideWidth = isTabletOrSmaller ? window.innerWidth : 1175;
+    const slideWidth = isTabletOrSmaller ? window.innerWidth : dimsRef.current.maxDistance;
     const nextIndex = Math.min(activeIndexRef.current + 1, slides.length - 1);
-    smoothScrollTo(nextIndex * slideWidth, 1200);
+    smoothScrollTo(nextIndex * slideWidth, 1000);
   };
 
   const scrollPrev = () => {
     if (!scrollRef.current) return;
     const isTabletOrSmaller = window.innerWidth < 1200;
-    const slideWidth = isTabletOrSmaller ? window.innerWidth : 1175;
+    const slideWidth = isTabletOrSmaller ? window.innerWidth : dimsRef.current.maxDistance;
     const prevIndex = Math.max(activeIndexRef.current - 1, 0);
-    smoothScrollTo(prevIndex * slideWidth, 1200);
+    smoothScrollTo(prevIndex * slideWidth, 1000);
   };
 
   const slides = [
@@ -225,21 +267,22 @@ export default function AudienceSection() {
   ];
 
   return (
-    <section className="w-full py-16 mb-25 desktop:mb-50">
+    <section className="w-full py-16 mb-[100px] min-[1200px]:max-[1609px]:mb-[200px] desktop:mb-[200px] min-[1610px]:mb-[200px]">
       <div 
         ref={scrollRef}
         onScroll={handleScroll}
         className="flex overflow-x-auto pb-10 snap-x snap-mandatory items-center [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none max-desktop:px-4!"
         style={{
-          paddingLeft: 'max(1rem, calc(50vw - 587.5px))',
-          paddingRight: 'max(1rem, calc(50vw - 587.5px))',
+          paddingLeft: `max(1rem, calc(50vw - ${dimsRef.current.pad}px))`,
+          paddingRight: `max(1rem, calc(50vw - ${dimsRef.current.pad}px))`,
         }}
       >
         {slides.map((slide, i) => (
           // CONTENEDOR FIJO: Evita que el layout salte (thrashing) durante la animación
           <div 
             key={i} 
-            className="flex items-center justify-center shrink-0 snap-center w-293.75 h-175 max-desktop:w-screen! max-desktop:h-125!"
+            className="flex items-center justify-center shrink-0 snap-center h-175 max-desktop:w-screen! max-desktop:h-125!"
+            style={{ width: `${dimsRef.current.maxDistance}px` }}
           >
             {/* TARJETA ANIMADA: Cambia de tamaño libremente dentro de su contenedor fijo */}
             <div 

@@ -7,40 +7,41 @@ export default function CourseCard({ titulo, descripcion, modalidad, slug, image
   const href = slug ? `/programas/${slug}` : "#";
 
   return (
-    <Link href={href} className="flex flex-col group" aria-label={`Ver curso: ${titulo}`}>
-      {/* Imagen */}
-      <div className="w-full aspect-[4/3] bg-gray-200 rounded-2xl mb-4 relative overflow-hidden flex items-end">
+    <div className="w-full h-auto min-h-[520px] bg-white rounded-3xl p-4 flex flex-col border border-transparent hover:border-primary hover:shadow-lg transition-all duration-300 cursor-pointer group">
+      {/* Imagen del curso */}
+      <div className="w-full h-[200px] tablet:h-[230px] desktop:h-[256px] mx-auto bg-gray-200 rounded-2xl mb-6 shrink-0 overflow-hidden relative">
         {imagenUrl && (
           <Image
             src={imagenUrl}
-            alt={titulo}
+            alt={titulo || "Curso"}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
         )}
-        {/* Etiqueta de modalidad */}
+      </div>
+
+      {/* Content */}
+      <div className="flex flex-col flex-grow text-left">
         {modalidad && (
-          <span className="absolute bottom-4 left-4 bg-[#8da5d7] text-white text-[10px] uppercase font-bold tracking-wide px-3 py-1 rounded-full z-10">
+          <span className="text-xs font-semibold text-primary uppercase tracking-wide mb-2">
             {modalidad}
           </span>
         )}
+        <h3 className="font-bold text-[28px] min-[1200px]:max-[1609px]:text-[18px] text-[#05162D] mb-4 leading-snug group-hover:text-primary transition-colors">
+          {titulo}
+        </h3>
+        {descripcion && (
+          <p className="text-[#445163] text-[16px] min-[1200px]:max-[1609px]:text-[13px] mb-6 flex-grow line-clamp-3">
+            {descripcion}
+          </p>
+        )}
+        <Link
+          href={href}
+          className="w-full h-[69px] min-[1200px]:max-[1609px]:h-[44px] bg-primary hover:bg-primary-dark text-white font-medium py-3 min-[1200px]:max-[1609px]:py-2 min-[1200px]:max-[1609px]:text-[14px] rounded-full transition flex items-center justify-center text-center mt-auto"
+        >
+          Ver detalles
+        </Link>
       </div>
-
-      {/* Contenido */}
-      <h3 className="font-bold text-lg text-[#0a1a3a] mb-2 leading-tight group-hover:text-[#0045A5] transition-colors">
-        {titulo}
-      </h3>
-      {descripcion && (
-        <p className="text-gray-500 text-xs mb-4 line-clamp-4 leading-relaxed">
-          {descripcion}
-        </p>
-      )}
-
-      {/* Botón */}
-      <span className="mt-auto w-full bg-primary group-hover:bg-primary-dark text-white font-semibold py-2.5 rounded-full transition-colors text-sm text-center">
-        Ver curso
-      </span>
-    </Link>
+    </div>
   );
 }
-
