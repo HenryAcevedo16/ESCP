@@ -76,7 +76,7 @@ export default async function ProgramaDetailPage({ params }) {
       <Navbar logoClassName="tablet:mt-3.5" />
 
       {/* ── BANNER HEADER ──────────────────────────────────────── */}
-      <section className="relative w-full bg-[#05162D] pt-32 pb-10 md:pt-44 md:pb-14 px-4 tablet:px-[60px] desktop:px-20 min-[1610px]:px-[118px]">
+      <section className="relative w-full bg-[#05162D] pt-32 pb-10 md:pt-44 md:pb-14 px-4 tablet:px-7.5 desktop:px-20 min-[1610px]:px-[118px]">
         {/* Breadcrumb */}
         <nav aria-label="Ruta de navegación" className="flex items-center gap-2 text-sm text-gray-400 mb-4 flex-wrap tablet:mt-2.5">
           <Link href="/programas" className="hover:text-white transition-colors">
@@ -139,7 +139,7 @@ export default async function ProgramaDetailPage({ params }) {
       </section>
 
       {/* ── MAIN CONTENT ───────────────────────────────────────── */}
-      <section className="w-full max-w-[1400px] mx-auto px-4 tablet:px-[60px] desktop:px-20 py-12 md:py-16 flex flex-col lg:flex-row gap-10 lg:gap-14">
+      <section className="w-full max-w-[1400px] mx-auto px-4 tablet:px-7.5 desktop:px-20 py-12 md:py-16 flex flex-col lg:flex-row gap-10 lg:gap-14">
 
         {/* ── LEFT COLUMN ─────────────────────────────── */}
         <div className="flex-1 min-w-0">

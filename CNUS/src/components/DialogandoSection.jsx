@@ -12,7 +12,7 @@ export default function DialogandoSection({ articulos = [] }) {
   const mainImageUrl = getStrapiImageUrl(mainArticle.imagen_portada);
 
   return (
-    <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] pt-16 tablet:pt-24 min-[1200px]:max-[1609px]:pt-0 min-[1200px]:max-[1609px]:pb-0 mb-[100px] min-[1200px]:max-[1609px]:mb-[200px] desktop:mb-[200px] mt-[100px] min-[1200px]:max-[1609px]:mt-[200px] desktop:mt-[200px]">
+    <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] pt-0 pb-0 mb-[200px] mt-[200px]">
       <div className="flex flex-col sm:flex-row items-baseline sm:items-center justify-between mb-10 min-[1200px]:max-[1609px]:mb-6">
         <h2 className="text-[32px] tablet:text-[44px] min-[1200px]:max-[1609px]:text-[36px] font-bold text-[#05162D]">Dialogando</h2>
         <Link

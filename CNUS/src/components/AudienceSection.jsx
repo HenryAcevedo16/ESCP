@@ -267,7 +267,7 @@ export default function AudienceSection() {
   ];
 
   return (
-    <section className="w-full py-16 mb-[100px] min-[1200px]:max-[1609px]:mb-[200px] desktop:mb-[200px] min-[1610px]:mb-[200px]">
+    <section className="w-full py-16 mb-[200px]">
       <div 
         ref={scrollRef}
         onScroll={handleScroll}

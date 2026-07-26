@@ -25,15 +25,15 @@ export default function CursosList({ cursos = [], ejes = [] }) {
 
   return (
     <div className="w-full">
-      {/* Control Bar: Dropdown de Ejes (Izquierda) + Buscador (Derecha) */}
-      <div className="flex flex-col sm:flex-row items-center justify-between mb-12 gap-4">
+      {/* Control Bar: Dropdown de Ejes + Buscador juntos al lado derecho en laptop */}
+      <div className="flex flex-col sm:flex-row items-center justify-between min-[1200px]:max-[1609px]:justify-end mb-12 gap-4">
         
         {/* Dropdown de Ejes (Izquierda del Buscador) */}
         <div className="relative w-full sm:w-80 shrink-0">
           <select
             value={selectedEje}
             onChange={(e) => setSelectedEje(e.target.value)}
-            className="w-full bg-[#05162D] text-white font-medium appearance-none py-3.5 px-5 pr-12 rounded-full text-sm sm:text-base cursor-pointer outline-none focus:ring-2 focus:ring-primary shadow-sm transition-all"
+            className="w-full bg-[#05162D] text-white font-medium appearance-none py-3.5 px-5 pr-12 rounded-full text-sm sm:text-base cursor-pointer outline-none focus:ring-2 focus:ring-primary transition-all"
           >
             <option value="">Todos los ejes formativos</option>
             {ejes.map((eje) => (
@@ -52,7 +52,7 @@ export default function CursosList({ cursos = [], ejes = [] }) {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Buscar por nombre..."
-            className="w-full pl-5 pr-12 py-3.5 rounded-full border border-gray-300 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm sm:text-base bg-white shadow-sm transition-all"
+            className="w-full pl-5 pr-12 py-3.5 rounded-full border border-gray-300 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-sm sm:text-base bg-white transition-all"
           />
           <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
         </div>

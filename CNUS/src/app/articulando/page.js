@@ -45,22 +45,27 @@ export default async function ArticulandoPage() {
         image={articuloDestacado?.imagen_portada}
         slug={articuloDestacado?.slug}
       />
-      <div className="flex flex-col pt-10 md:pt-[200px] gap-[100px] md:gap-[200px] pb-[100px] md:pb-[200px]">
+      <div className="flex flex-col pt-0 gap-[200px] pb-[200px]">
         <DialogandoWithPoll
+          id="debate"
           sectionTitle="Debate"
           mainArticle={articuloDebate}
           debate={debate}
         />
         <CategoryGrid
+          id="notas-del-presidente"
           sectionTitle="Notas del presidente"
           mainArticle={mainNota}
           secondaryArticles={secundariasNota}
+          verTodasHref="/articulando/notas-del-presidente"
         />
         <CategoryRow
+          id="noticias-y-eventos"
           sectionTitle="Noticias"
           categoryArticles={Array.isArray(noticiasData) ? noticiasData : []}
         />
         <CategoryRow
+          id="pensamiento-complejo"
           sectionTitle="Artículos"
           categoryArticles={Array.isArray(articulosData) ? articulosData : []}
           bgColor="bg-white"

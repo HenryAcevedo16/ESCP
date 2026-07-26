@@ -14,7 +14,7 @@ export default function NewsletterSection() {
   };
 
   return (
-    <section className="max-w-[1680px] w-full mx-auto px-4 tablet:px-15 desktop:px-20 min-[1610px]:px-6 py-20 min-[1200px]:max-[1609px]:pt-0 min-[1200px]:max-[1609px]:pb-0 mb-[100px] min-[1200px]:max-[1609px]:mb-[200px] desktop:mb-[200px]">
+    <section className="max-w-[1680px] w-full mx-auto px-4 tablet:px-15 desktop:px-20 min-[1610px]:px-6 py-20 min-[1200px]:max-[1609px]:pt-0 min-[1200px]:max-[1609px]:pb-0 mb-[200px]">
       <div className="flex flex-col desktop:flex-row rounded-3xl overflow-hidden bg-[#0045A5]">
         
         {/* Left Side: Image */}

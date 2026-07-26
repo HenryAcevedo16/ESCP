@@ -2,31 +2,31 @@ import Image from "next/image";
 import Link from "next/link";
 import { getStrapiImageUrl, formatDate, getAutorNombre } from "@/lib/strapi";
 
-export default function CategoryGrid({ sectionTitle, mainArticle, secondaryArticles = [] }) {
+export default function CategoryGrid({ id, sectionTitle, mainArticle, secondaryArticles = [], verTodasHref = "/articulando" }) {
   if (!mainArticle) return null;
 
   const mainImageUrl = getStrapiImageUrl(mainArticle.imagen_portada);
 
   return (
-    <section className="w-full px-4 md:px-[60px] desktop:px-[80px] min-[1610px]:px-[120px] max-w-[1920px] mx-auto flex flex-col">
+    <section id={id} className="w-full px-4 tablet:px-7.5 desktop:px-20 min-[1610px]:px-29.5 max-w-[1920px] mx-auto flex flex-col">
 
       {/* Título de sección */}
       <div className="flex justify-between items-center mb-6 md:mb-10">
         <h2 className="text-2xl md:text-[44px] font-black text-[#05162D] tracking-[-0.88px]">
           {sectionTitle}
         </h2>
-        <Link href="/articulando" className="text-[#043F9F] font-semibold hover:underline text-base md:text-[20px] shrink-0 ml-4">
+        <Link href={verTodasHref} className="text-[#043F9F] font-semibold hover:underline text-base md:text-[20px] shrink-0 ml-4">
           Ver todas →
         </Link>
       </div>
 
       {/* Layout principal */}
-      <div className="flex flex-col xl:flex-row gap-6">
+      <div className="flex flex-col min-[1200px]:flex-row gap-6">
 
         {/* Tarjeta grande */}
         <Link
           href={`/articulando/${mainArticle.slug}`}
-          className="flex flex-col group cursor-pointer w-full xl:w-[970px] shrink-0 relative rounded-[20px] md:rounded-[40px] overflow-hidden"
+          className="flex flex-col group cursor-pointer w-full min-[1200px]:max-[1609px]:w-[58%] min-[1610px]:w-[970px] shrink-0 relative rounded-[20px] md:rounded-[40px] overflow-hidden"
           style={{ minHeight: "300px" }}
         >
           <div className="w-full h-[260px] sm:h-[380px] md:h-[500px] xl:h-[727px] relative bg-[#05162D]">

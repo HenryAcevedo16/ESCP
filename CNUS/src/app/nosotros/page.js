@@ -68,7 +68,7 @@ export default function NosotrosPage() {
     <main className="w-full bg-white flex flex-col min-h-screen overflow-x-hidden">
       
       {/* ─── BANNER / HERO CON 200PX DE SEPARACIÓN ABAJO ──────────── */}
-      <section className="relative w-full h-[360px] tablet:h-[440px] desktop:h-[480px] flex flex-col overflow-hidden mb-[100px] min-[1200px]:max-[1609px]:mb-[200px] desktop:mb-[200px]">
+      <section className="relative w-full h-[360px] tablet:h-[440px] desktop:h-[480px] flex flex-col overflow-hidden mb-[200px]">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')` }}
@@ -83,7 +83,7 @@ export default function NosotrosPage() {
       </section>
 
       {/* ─── SUB-NAVIGATION TAB BAR (RESPONSIVO PARA CELULARES Y PANTALLAS GRANDES) ─── */}
-      <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] mb-[100px] min-[1200px]:max-[1609px]:mb-[200px] desktop:mb-[200px] flex flex-col items-center gap-3">
+      <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] mb-[200px] flex flex-col items-center gap-3">
         
         {/* VISTA PARA CELULARES (sm:hidden) */}
         <div className="flex flex-col items-center gap-3 sm:hidden w-full">
@@ -169,7 +169,7 @@ export default function NosotrosPage() {
       {activeTab === "quienes-somos" && (
         <div className="animate-fadeIn">
           {/* SECCIÓN INTRODUCCIÓN CON MARGEN EXACTO DE NAVBAR (LOGO A HAMBURGUESA) */}
-          <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] mb-[100px] min-[1200px]:max-[1609px]:mb-[200px] desktop:mb-[200px]">
+          <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] mb-[200px]">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-[166px]">
               
               {/* Logo emblemático a color */}
@@ -199,7 +199,7 @@ export default function NosotrosPage() {
           </section>
 
           {/* MISIÓN Y VISIÓN */}
-          <section className="w-full bg-[#f4f6f8] py-20 mb-[100px] min-[1200px]:max-[1609px]:mb-[200px] desktop:mb-[200px]">
+          <section className="w-full bg-[#f4f6f8] py-20 mb-[200px]">
             <div className="max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] grid grid-cols-1 md:grid-cols-2 gap-8">
               
               {/* Tarjeta Misión */}
@@ -232,7 +232,7 @@ export default function NosotrosPage() {
           </section>
 
           {/* VALORES */}
-          <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] mb-[100px] min-[1200px]:max-[1609px]:mb-[200px] desktop:mb-[200px]">
+          <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] mb-[200px]">
             <div className="text-center mb-16">
               <h2 className="text-3xl tablet:text-4xl desktop:text-5xl font-bold text-[#05162D]">
                 Nuestros valores
@@ -256,7 +256,7 @@ export default function NosotrosPage() {
           </section>
 
           {/* OBJETIVOS ESPECÍFICOS */}
-          <section className="w-full bg-[#0B1426] py-20 text-white mb-[100px] min-[1200px]:max-[1609px]:mb-[200px] desktop:mb-[200px]">
+          <section className="w-full bg-[#0B1426] py-20 text-white mb-[200px]">
             <div className="max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px]">
               <div className="text-center mb-16">
                 <h2 className="text-3xl tablet:text-4xl desktop:text-5xl font-bold text-white">
@@ -287,7 +287,7 @@ export default function NosotrosPage() {
       {/* ─── TAB 2: PERFIL SOCIOPOLÍTICO ──────────────────────────── */}
       {activeTab === "perfil-sociopolitico" && (
         <div className="animate-fadeIn">
-          <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] mb-[100px] min-[1200px]:max-[1609px]:mb-[200px] desktop:mb-[200px]">
+          <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] mb-[200px]">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-3xl tablet:text-4xl desktop:text-5xl font-bold text-[#05162D] mb-6">
                 Perfil Sociopolítico e Identidad
@@ -297,7 +297,7 @@ export default function NosotrosPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-[100px] min-[1200px]:max-[1609px]:mb-[200px] desktop:mb-[200px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-[200px]">
               <div className="bg-[#f8f9fa] border border-gray-100 rounded-[28px] p-8 tablet:p-10 flex gap-6 items-start">
                 <div className="w-14 h-14 rounded-2xl bg-[#0045A5] text-white flex items-center justify-center shrink-0 shadow-md">
                   <Scale size={26} />
@@ -339,7 +339,7 @@ export default function NosotrosPage() {
       {/* ─── TAB 3: VISIÓN FORMATIVA Y ENFOQUE METODOLÓGICO ──────── */}
       {activeTab === "vision-formativa" && (
         <div className="animate-fadeIn">
-          <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] mb-[100px] min-[1200px]:max-[1609px]:mb-[200px] desktop:mb-[200px]">
+          <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] mb-[200px]">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-3xl tablet:text-4xl desktop:text-5xl font-bold text-[#05162D] mb-6">
                 Visión Formativa y Enfoque Metodológico
@@ -349,7 +349,7 @@ export default function NosotrosPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-[100px] min-[1200px]:max-[1609px]:mb-[200px] desktop:mb-[200px]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-[200px]">
               <div className="bg-white border border-gray-200 rounded-[28px] p-8 shadow-sm flex flex-col gap-4">
                 <div className="w-12 h-12 rounded-full bg-blue-50 text-[#0045A5] flex items-center justify-center">
                   <GraduationCap size={24} />

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function NavbarArticulando() {
@@ -18,64 +18,95 @@ export default function NavbarArticulando() {
 
   return (
     <>
-      <nav className={`w-full z-50 text-[#05162D] flex items-center justify-center transition-all duration-300 px-4 tablet:px-7.5 desktop:px-20 2xl:px-29.5
+      <nav className={`w-full z-50 text-[#05162D] flex items-center justify-center transition-all duration-300 px-4 tablet:px-7.5 desktop:px-20 min-[1610px]:px-29.5
       ${isScrolled
-        ? 'fixed top-0 bg-[#F2F4F7]/90 backdrop-blur-md h-19.75'
-        : 'absolute top-0 bg-[#F2F4F7] h-29'
+        ? 'fixed top-0 bg-[#F2F4F7]/90 backdrop-blur-md shadow-xl h-17.5 tablet:h-19.75'
+        : 'absolute top-0 bg-[#F2F4F7] h-22.5 tablet:h-29'
       }`}
     >
-      <div className="w-full max-w-[1920px] flex items-center justify-between relative">
+      <div className="w-full max-w-[1920px] relative flex items-center justify-between">
 
-        {/* Left Links — only visible at 1200px+ */}
-        <div className={`hidden desktop:flex flex-1 items-center justify-between text-[#05162D] font-medium transition-all duration-300
-          ${isScrolled ? 'text-[15px] min-[1610px]:text-[16px] px-0 min-[1610px]:pl-40 pr-10' : 'text-[16px] min-[1610px]:text-[20px] px-0 min-[1610px]:pl-0 pr-10'}`}
+        {/* Desktop View — CSS Grid: [left items] [logo] [right items]
+            The 1fr auto 1fr ensures logo is EXACTLY at 50% always */}
+        <div className={`hidden desktop:grid w-full font-medium transition-all duration-300 items-center
+          ${isScrolled
+            ? 'text-[12px] min-[1400px]:text-[13px] min-[1610px]:text-[14px]'
+            : 'text-[12px] min-[1400px]:text-[13px] min-[1610px]:text-[15px]'
+          }`}
+          style={{ gridTemplateColumns: 'minmax(0, 1fr) auto minmax(0, 1fr)' }}
         >
-          <Link href="/" className="hover:text-primary transition">Inicio</Link>
-          <Link href="/articulando" className="hover:text-primary transition">Noticias</Link>
-          <div className="flex items-center gap-1 cursor-pointer hover:text-primary transition">
-            <span>Artículos</span>
-            <ChevronDown size={isScrolled ? 16 : 20} className="transition-all duration-300" />
+          {/* Left column — 3 items spread across left half */}
+          <div className="flex items-center justify-end gap-6 min-[1400px]:gap-8 min-[1610px]:gap-10 pr-6 min-[1400px]:pr-10 min-[1610px]:pr-14">
+            <Link href="/" className="hover:text-primary transition whitespace-nowrap">
+              Inicio
+            </Link>
+            <Link href="/articulando/notas-del-presidente" className="hover:text-primary transition whitespace-nowrap">
+              Notas del presidente
+            </Link>
+            <Link href="/articulando#debate" className="hover:text-primary transition whitespace-nowrap">
+              Diálogo, debate y opinión
+            </Link>
+          </div>
+
+          {/* Center column — Logo always in the exact middle */}
+          <Link href="/articulando" className="flex items-center justify-center shrink-0">
+            <div className={`relative transition-all duration-300 ${
+                isScrolled
+                  ? 'w-25 h-11.5 tablet:w-38.25 tablet:h-17.25'
+                  : 'w-40 h-18 tablet:w-63.75 tablet:h-29'
+              }`}>
+              <Image
+                src="/logos/logocolor.svg"
+                alt="Logo Escuela CNUS Color"
+                fill
+                className="object-contain"
+                unoptimized
+              />
+            </div>
+          </Link>
+
+          {/* Right column — 3 items + button spread across right half */}
+          <div className="flex items-center justify-start gap-6 min-[1400px]:gap-8 min-[1610px]:gap-10 pl-6 min-[1400px]:pl-10 min-[1610px]:pl-14">
+            <Link href="/articulando#columna-del-director" className="hover:text-primary transition whitespace-nowrap">
+              La columna del Director
+            </Link>
+            <Link href="/articulando#pensamiento-complejo" className="hover:text-primary transition whitespace-nowrap">
+              Pensamiento complejo
+            </Link>
+            <Link href="/articulando#noticias-y-eventos" className="hover:text-primary transition whitespace-nowrap">
+              Noticia y eventos
+            </Link>
+            <button
+              type="button"
+              aria-label="Suscríbete al boletín"
+              className={`hidden desktop:flex items-center justify-center bg-[#0E52C6] hover:bg-blue-800 text-[#FFFFFF] rounded-full font-medium transition-all duration-300 shrink-0 px-4 min-[1400px]:px-5 min-[1610px]:px-7
+              ${isScrolled ? 'h-10 min-[1610px]:h-13.75' : 'h-11 min-[1610px]:h-17.25'}`}
+            >
+              Suscríbete
+            </button>
           </div>
         </div>
 
-        {/* Center Logo */}
-        <Link href="/" className="flex items-center justify-center shrink-0 z-10 px-8">
-          <div className={`relative transition-all duration-300 ${
-              isScrolled
-                ? 'w-25 h-11.5 tablet:w-38.25 tablet:h-17.25'
-                : 'w-40 h-18 tablet:w-63.75 tablet:h-29'
-            }`}>
-            <Image
-              src="/logos/logocolor.svg"
-              alt="Logo Escuela CNUS Color"
-              fill
-              className="object-contain"
-              unoptimized
-            />
-          </div>
-        </Link>
+        {/* Mobile / Tablet View (<1200px) */}
+        <div className="flex desktop:hidden items-center justify-between w-full">
+          <Link href="/articulando" className="flex items-center shrink-0">
+            <div className={`relative transition-all duration-300 ${
+                isScrolled
+                  ? 'w-25 h-11.5 tablet:w-38.25 tablet:h-17.25'
+                  : 'w-40 h-18 tablet:w-63.75 tablet:h-29'
+              }`}>
+              <Image
+                src="/logos/logocolor.svg"
+                alt="Logo Escuela CNUS Color"
+                fill
+                className="object-contain"
+                unoptimized
+              />
+            </div>
+          </Link>
 
-        {/* Right Links & Action Button */}
-        <div className={`flex items-center justify-end desktop:justify-between flex-1 transition-all duration-300 ${isScrolled ? 'desktop:pl-10 min-[1610px]:pl-20 pr-6 desktop:pr-0' : 'desktop:pl-10 min-[1610px]:pl-20 pr-6 desktop:pr-0'}`}>
-          <div className={`hidden desktop:flex items-center gap-6 min-[1610px]:gap-0 min-[1610px]:justify-between w-auto min-[1610px]:w-full pr-5 min-[1610px]:pr-15 text-[#05162D] font-medium transition-all duration-300
-            ${isScrolled ? 'text-[15px] min-[1610px]:text-[16px]' : 'text-[16px] min-[1610px]:text-[20px]'}`}
-          >
-            <Link href="/articulando" className="hover:text-primary transition">Debate</Link>
-            <Link href="/articulando" className="hover:text-primary transition whitespace-nowrap">Notas del presidente</Link>
-          </div>
-
-          <button
-            type="button"
-            aria-label="Suscríbete al boletín"
-            className={`hidden desktop:flex items-center justify-center gap-2.5 w-37.5 min-[1610px]:w-47 bg-[#0E52C6] hover:bg-blue-800 text-[#FFFFFF] rounded-full font-medium transition-all duration-300
-            ${isScrolled ? 'h-12 min-[1610px]:h-13.75 text-[15px] min-[1610px]:text-[16px]' : 'h-13.75 min-[1610px]:h-17.25 text-[16px] min-[1610px]:text-[20px]'}`}
-          >
-            Suscríbete
-          </button>
-
-          {/* Hamburger — hidden at 1200px+ */}
           <button 
-            className="desktop:hidden z-50 relative ml-4"
+            className="desktop:hidden z-50 relative"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
             aria-expanded={isMenuOpen}
@@ -88,30 +119,52 @@ export default function NavbarArticulando() {
             )}
           </button>
         </div>
+
       </div>
     </nav>
 
-      {/* Mobile/Tablet Menu Overlay — hidden at 1200px+ */}
+      {/* Mobile/Tablet Menu Overlay */}
       <div 
         id="mobile-navigation-articulando"
-        className={`fixed inset-0 bg-white text-[#05162D] z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-300 desktop:hidden ${
+        className={`fixed inset-0 bg-white text-[#05162D] z-40 flex flex-col items-center justify-center gap-6 px-6 text-center transition-transform duration-300 desktop:hidden ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <Link href="/" onClick={() => setIsMenuOpen(false)} className="text-2xl font-medium hover:text-primary transition">Inicio</Link>
-        <div className="flex items-center gap-2 text-2xl font-medium hover:text-primary transition cursor-pointer">
-          <span>Categorías</span>
-          <ChevronDown size={24} />
-        </div>
-        <div className="flex items-center gap-2 text-2xl font-medium hover:text-primary transition cursor-pointer">
-          <span>Programas</span>
-          <ChevronDown size={24} />
-        </div>
-        <Link href="/contacto" onClick={() => setIsMenuOpen(false)} className="text-2xl font-medium hover:text-primary transition">Contacto</Link>
-        <button type="button" aria-label="Suscríbete al boletín" className="mt-8 bg-[#0E52C6] hover:bg-blue-800 text-white rounded-full font-medium h-15 px-10 text-[20px] transition-all">
-          Inscríbete
+        <Link href="/" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
+          Inicio
+        </Link>
+        <Link href="/articulando/notas-del-presidente" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
+          Notas del presidente
+        </Link>
+        <Link href="/articulando#debate" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
+          Diálogo, debate y opinión
+        </Link>
+        <Link href="/articulando#columna-del-director" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
+          La columna del Director
+        </Link>
+        <Link href="/articulando#pensamiento-complejo" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
+          Pensamiento complejo
+        </Link>
+        <Link href="/articulando#noticias-y-eventos" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
+          Noticia y eventos
+        </Link>
+
+        <button 
+          type="button" 
+          aria-label="Suscríbete al boletín" 
+          onClick={() => setIsMenuOpen(false)}
+          className="mt-4 bg-[#0E52C6] hover:bg-blue-800 text-white rounded-full font-medium h-15 px-10 text-[20px] transition-all"
+        >
+          Suscríbete
         </button>
       </div>
     </>
   );
 }
+
+
+
+
+
+
+

@@ -3,12 +3,12 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getStrapiImageUrl, formatDate, getAutorNombre } from "@/lib/strapi";
 
-export default function CategoryRow({ sectionTitle, categoryArticles = [], bgColor = "bg-[#EFF3F4]" }) {
+export default function CategoryRow({ id, sectionTitle, categoryArticles = [], bgColor = "bg-[#EFF3F4]" }) {
   if (categoryArticles.length === 0) return null;
 
   return (
-    <section className={`w-full h-auto flex flex-col py-10 md:py-[78px] ${bgColor}`}>
-      <div className="w-full px-4 md:px-[60px] desktop:px-[80px] min-[1610px]:px-[120px] max-w-[1920px] mx-auto">
+    <section id={id} className={`w-full h-auto flex flex-col py-10 md:py-[78px] ${bgColor}`}>
+      <div className="w-full px-4 tablet:px-7.5 desktop:px-20 min-[1610px]:px-29.5 max-w-[1920px] mx-auto">
 
         {/* Título */}
         <div className="flex justify-between items-center mb-6 md:mb-10">
