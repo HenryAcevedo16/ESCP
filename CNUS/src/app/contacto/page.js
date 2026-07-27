@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+﻿import Navbar from "@/components/Navbar";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -24,7 +24,7 @@ export default function ContactoPage() {
       </section>
 
       {/* Main Content Section */}
-      <section className="max-w-[1680px] mx-auto px-4 tablet:px-7.5 desktop:px-20 pt-[200px] mb-[200px] pb-16 md:pb-24 flex flex-col lg:flex-row gap-10 lg:gap-[24px]">
+      <section className="max-w-[1680px] mx-auto px-4 tablet:px-7.5 laptop:px-20 pt-[200px] mb-[200px] pb-16 md:pb-24 flex flex-col lg:flex-row gap-10 lg:gap-[24px]">
         
         {/* Left Side: Contact Form (Dark Blue Card) */}
         <div className="w-full lg:w-1/2 shrink-0 bg-[#0B1426] rounded-[32px] md:rounded-[40px] p-8 md:p-14 py-12 text-white flex flex-col items-center justify-center">
@@ -78,7 +78,7 @@ export default function ContactoPage() {
 
               <button 
                 type="submit" 
-                className="w-full h-[70px] md:h-[89px] bg-[#0045A5] hover:bg-blue-700 text-white text-lg tablet:text-2xl desktop:text-2xl font-semibold rounded-full transition flex items-center justify-center"
+                className="w-full h-[70px] md:h-[89px] bg-[#0045A5] hover:bg-blue-700 text-white text-lg tablet:text-2xl laptop:text-2xl font-semibold rounded-full transition flex items-center justify-center"
               >
                 Enviar
               </button>

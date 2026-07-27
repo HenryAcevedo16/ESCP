@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import { getStrapiImageUrl, formatDate, getAutorNombre } from "@/lib/strapi";
 
@@ -8,7 +8,7 @@ export default function CategoryGrid({ id, sectionTitle, mainArticle, secondaryA
   const mainImageUrl = getStrapiImageUrl(mainArticle.imagen_portada);
 
   return (
-    <section id={id} className="w-full px-4 tablet:px-7.5 desktop:px-20 min-[1610px]:px-29.5 max-w-[1920px] mx-auto flex flex-col">
+    <section id={id} className="w-full px-4 tablet:px-7.5 laptop:px-20 desktop:px-29.5 max-w-[1920px] mx-auto flex flex-col">
 
       {/* Título de sección */}
       <div className="flex justify-between items-center mb-6 md:mb-10">
@@ -21,12 +21,12 @@ export default function CategoryGrid({ id, sectionTitle, mainArticle, secondaryA
       </div>
 
       {/* Layout principal */}
-      <div className="flex flex-col min-[1200px]:flex-row gap-6">
+      <div className="flex flex-col laptop:flex-row gap-6">
 
         {/* Tarjeta grande */}
         <Link
           href={`/articulando/${mainArticle.slug}`}
-          className="flex flex-col group cursor-pointer w-full min-[1200px]:max-[1609px]:w-[58%] min-[1610px]:w-[970px] shrink-0 relative rounded-[20px] md:rounded-[40px] overflow-hidden"
+          className="flex flex-col group cursor-pointer w-full laptop:w-[58%] desktop:w-[970px] shrink-0 relative rounded-[20px] md:rounded-[40px] overflow-hidden"
           style={{ minHeight: "300px" }}
         >
           <div className="w-full h-[260px] sm:h-[380px] md:h-[500px] xl:h-[727px] relative bg-[#05162D]">

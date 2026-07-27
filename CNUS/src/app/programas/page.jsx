@@ -1,4 +1,4 @@
-import ProgramasHero from "@/components/programas/ProgramasHero";
+﻿import ProgramasHero from "@/components/programas/ProgramasHero";
 import CursosList from "@/components/programas/CursosList";
 import { getProgramas, getEjesFormativos } from "@/lib/strapi";
 
@@ -16,7 +16,7 @@ export default async function ProgramasPage() {
   return (
     <main className="flex flex-col min-h-screen bg-white">
       <ProgramasHero />
-      <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-7.5 min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] pt-[200px] mb-[200px]">
+      <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-7.5 laptop:px-20 laptop:px-[80px] pt-[200px] mb-[200px]">
         <CursosList cursos={programas ?? []} ejes={ejes ?? []} />
       </section>
     </main>

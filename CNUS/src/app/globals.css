@@ -14,9 +14,10 @@
   --color-primary: var(--color-primary);
   --color-primary-dark: var(--color-primary-dark);
   --font-sans: var(--font-primary);
-  /* Custom breakpoints: mobile < 720px | tablet 720–1199px | desktop 1200px+ */
+  /* Custom breakpoints: mobile < 720px | tablet 720–1199px | laptop 1200–1609px | desktop 1610px+ */
   --breakpoint-tablet: 720px;
-  --breakpoint-desktop: 1200px;
+  --breakpoint-laptop: 1200px;
+  --breakpoint-desktop: 1610px;
 }
 
 body {

@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import { getStrapiImageUrl } from "@/lib/strapi";
 
@@ -90,14 +90,14 @@ export default function HeroSection({ heroConfig = null }) {
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/30" />
 
         {/* Hero Content */}
-        <div className="relative z-10 w-full max-w-[1920px] mx-auto h-full flex flex-col items-start desktop:items-center justify-center text-left desktop:text-center px-4 tablet:px-[60px] desktop:px-[80px] min-[1610px]:px-[118px] pt-28 tablet:pt-40 pb-32">
+        <div className="relative z-10 w-full max-w-[1920px] mx-auto h-full flex flex-col items-start laptop:items-center justify-center text-left laptop:text-center px-4 tablet:px-[60px] laptop:px-[80px] laptop:px-[118px] pt-28 tablet:pt-40 pb-32">
           {titulo && (
-            <h1 className="text-3xl sm:text-4xl tablet:text-5xl desktop:text-6xl font-bold text-white mb-6 leading-tight max-w-[1000px] desktop:max-w-[1300px] desktop:mx-auto mt-10 tablet:mt-0">
+            <h1 className="text-3xl sm:text-4xl tablet:text-5xl laptop:text-6xl font-bold text-white mb-6 leading-tight max-w-[1000px] laptop:max-w-[1300px] laptop:mx-auto mt-10 tablet:mt-0">
               {titulo}
             </h1>
           )}
           {subtitulo && (
-            <p className="text-lg tablet:text-xl text-gray-200 mb-6 tablet:mb-10 max-w-[700px] desktop:max-w-[900px] desktop:mx-auto">
+            <p className="text-lg tablet:text-xl text-gray-200 mb-6 tablet:mb-10 max-w-[700px] laptop:max-w-[900px] laptop:mx-auto">
               {subtitulo}
             </p>
           )}
@@ -139,19 +139,19 @@ export default function HeroSection({ heroConfig = null }) {
           />
           {stat_1 && (
             <div className="text-center flex-1">
-              <p className="font-bold text-gray-900 text-xs sm:text-sm tablet:text-lg min-[1200px]:max-[1609px]:text-[18px]! min-[1610px]:text-[20px]!">{stat_1}</p>
+              <p className="font-bold text-gray-900 text-xs sm:text-sm tablet:text-lg laptop:text-[18px]! laptop:text-[20px]!">{stat_1}</p>
             </div>
           )}
-          {stat_1 && stat_2 && <div className="w-px h-6 min-[1200px]:max-[1609px]:h-8 bg-gray-200 shrink-0" />}
+          {stat_1 && stat_2 && <div className="w-px h-6 laptop:h-8 bg-gray-200 shrink-0" />}
           {stat_2 && (
             <div className="text-center flex-1">
-              <p className="font-bold text-gray-900 text-xs sm:text-sm tablet:text-lg min-[1200px]:max-[1609px]:text-[18px]! min-[1610px]:text-[20px]!">{stat_2}</p>
+              <p className="font-bold text-gray-900 text-xs sm:text-sm tablet:text-lg laptop:text-[18px]! laptop:text-[20px]!">{stat_2}</p>
             </div>
           )}
-          {stat_2 && stat_3 && <div className="w-px h-6 min-[1200px]:max-[1609px]:h-8 bg-gray-200 shrink-0" />}
+          {stat_2 && stat_3 && <div className="w-px h-6 laptop:h-8 bg-gray-200 shrink-0" />}
           {stat_3 && (
             <div className="text-center flex-1">
-              <p className="font-bold text-gray-900 text-xs sm:text-sm tablet:text-lg min-[1200px]:max-[1609px]:text-[18px]! min-[1610px]:text-[20px]!">{stat_3}</p>
+              <p className="font-bold text-gray-900 text-xs sm:text-sm tablet:text-lg laptop:text-[18px]! laptop:text-[20px]!">{stat_3}</p>
             </div>
           )}
         </div>

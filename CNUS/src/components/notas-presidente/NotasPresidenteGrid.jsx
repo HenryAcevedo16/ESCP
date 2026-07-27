@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -123,39 +123,39 @@ function NotaCard({ nota }) {
   return (
     <Link
       href={`/articulando/${nota.slug}`}
-      className="group flex flex-col bg-white border border-[#E8ECF0] rounded-[20px] min-[1200px]:rounded-[28px] overflow-hidden hover:shadow-[0_12px_48px_rgba(5,22,45,0.10)] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+      className="group flex flex-col bg-white border border-[#E8ECF0] rounded-[20px] laptop:rounded-[28px] overflow-hidden hover:shadow-[0_12px_48px_rgba(5,22,45,0.10)] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
     >
       {/* Color accent top bar */}
       <div className="w-full h-1 bg-gradient-to-r from-[#0E52C6] to-[#4A8EFF] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       {/* Card body */}
-      <div className="flex flex-col flex-1 p-5 min-[1200px]:p-7 min-[1610px]:p-8">
+      <div className="flex flex-col flex-1 p-5 laptop:p-7 desktop:p-8">
         {/* Meta row */}
         <div className="flex items-center gap-2 flex-wrap mb-4">
-          <span className="inline-block text-[11px] min-[1200px]:text-[13px] font-semibold px-3 py-1 rounded-full bg-[#0E52C6]/10 text-[#0E52C6]">
+          <span className="inline-block text-[11px] laptop:text-[13px] font-semibold px-3 py-1 rounded-full bg-[#0E52C6]/10 text-[#0E52C6]">
             Notas del Presidente
           </span>
-          <span className="text-[#A0A4A8] text-[11px] min-[1200px]:text-[13px]">
+          <span className="text-[#A0A4A8] text-[11px] laptop:text-[13px]">
             {nota.tiempoLectura} lectura
           </span>
         </div>
 
         {/* Title */}
-        <h3 className="font-bold text-[#05162D] text-base min-[1200px]:text-[20px] min-[1610px]:text-[22px] leading-snug tracking-tight mb-3 line-clamp-3 group-hover:text-[#0E52C6] transition-colors">
+        <h3 className="font-bold text-[#05162D] text-base laptop:text-[20px] desktop:text-[22px] leading-snug tracking-tight mb-3 line-clamp-3 group-hover:text-[#0E52C6] transition-colors">
           {nota.titulo}
         </h3>
 
         {/* Excerpt */}
-        <p className="text-[#555B63] text-sm min-[1200px]:text-[15px] leading-relaxed line-clamp-3 flex-1">
+        <p className="text-[#555B63] text-sm laptop:text-[15px] leading-relaxed line-clamp-3 flex-1">
           {nota.extracto}
         </p>
 
         {/* Footer */}
         <div className="flex items-center justify-between mt-5 pt-4 border-t border-[#F0F2F5]">
-          <span className="text-[#777C82] text-xs min-[1200px]:text-[14px]">
+          <span className="text-[#777C82] text-xs laptop:text-[14px]">
             {nota.fecha}
           </span>
-          <span className="flex items-center gap-1 text-[#0E52C6] font-semibold text-xs min-[1200px]:text-[14px] opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <span className="flex items-center gap-1 text-[#0E52C6] font-semibold text-xs laptop:text-[14px] opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             Leer
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
               <path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -180,22 +180,22 @@ export default function NotasPresidenteGrid() {
   };
 
   return (
-    <section className="w-full px-4 tablet:px-7.5 desktop:px-20 min-[1610px]:px-29.5 max-w-[1920px] mx-auto pb-[200px]">
+    <section className="w-full px-4 tablet:px-7.5 laptop:px-20 desktop:px-29.5 max-w-[1920px] mx-auto pb-[200px]">
 
       {/* Section header */}
-      <div className="flex flex-col min-[1200px]:flex-row min-[1200px]:items-end justify-between gap-4 mb-10 min-[1200px]:mb-14">
+      <div className="flex flex-col laptop:flex-row laptop:items-end justify-between gap-4 mb-10 laptop:mb-14">
         <div>
-          <h2 className="text-3xl min-[1200px]:text-[44px] min-[1610px]:text-[52px] font-black text-[#05162D] tracking-tight leading-none">
+          <h2 className="text-3xl laptop:text-[44px] desktop:text-[52px] font-black text-[#05162D] tracking-tight leading-none">
             Todas las notas
           </h2>
         </div>
-        <span className="text-[#777C82] text-sm min-[1200px]:text-[16px]">
+        <span className="text-[#777C82] text-sm laptop:text-[16px]">
           {MOCK_NOTAS.length} notas publicadas
         </span>
       </div>
 
       {/* Cards grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 min-[1200px]:grid-cols-3 gap-5 min-[1200px]:gap-6 min-[1610px]:gap-8 mb-12 min-[1200px]:mb-16">
+      <div className="grid grid-cols-1 sm:grid-cols-2 laptop:grid-cols-3 gap-5 laptop:gap-6 desktop:gap-8 mb-12 laptop:mb-16">
         {visibleNotes.map((nota) => (
           <NotaCard key={nota.id} nota={nota} />
         ))}
@@ -203,13 +203,13 @@ export default function NotasPresidenteGrid() {
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 min-[1200px]:gap-3">
+        <div className="flex items-center justify-center gap-2 laptop:gap-3">
           {/* Prev */}
           <button
             onClick={() => handlePage(currentPage - 1)}
             disabled={currentPage === 1}
             aria-label="Página anterior"
-            className="flex items-center justify-center w-10 h-10 min-[1200px]:w-12 min-[1200px]:h-12 rounded-full border border-[#E0E4EA] text-[#05162D] hover:border-[#0E52C6] hover:text-[#0E52C6] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+            className="flex items-center justify-center w-10 h-10 laptop:w-12 laptop:h-12 rounded-full border border-[#E0E4EA] text-[#05162D] hover:border-[#0E52C6] hover:text-[#0E52C6] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
           >
             <ArrowLeft size={18} />
           </button>
@@ -221,7 +221,7 @@ export default function NotasPresidenteGrid() {
               onClick={() => handlePage(page)}
               aria-label={`Página ${page}`}
               aria-current={currentPage === page ? "page" : undefined}
-              className={`flex items-center justify-center w-10 h-10 min-[1200px]:w-12 min-[1200px]:h-12 rounded-full font-semibold text-sm min-[1200px]:text-[16px] transition-all duration-200 ${
+              className={`flex items-center justify-center w-10 h-10 laptop:w-12 laptop:h-12 rounded-full font-semibold text-sm laptop:text-[16px] transition-all duration-200 ${
                 currentPage === page
                   ? "bg-[#0E52C6] text-white shadow-md shadow-blue-200"
                   : "border border-[#E0E4EA] text-[#05162D] hover:border-[#0E52C6] hover:text-[#0E52C6]"
@@ -236,7 +236,7 @@ export default function NotasPresidenteGrid() {
             onClick={() => handlePage(currentPage + 1)}
             disabled={currentPage === totalPages}
             aria-label="Página siguiente"
-            className="flex items-center justify-center w-10 h-10 min-[1200px]:w-12 min-[1200px]:h-12 rounded-full border border-[#E0E4EA] text-[#05162D] hover:border-[#0E52C6] hover:text-[#0E52C6] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+            className="flex items-center justify-center w-10 h-10 laptop:w-12 laptop:h-12 rounded-full border border-[#E0E4EA] text-[#05162D] hover:border-[#0E52C6] hover:text-[#0E52C6] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
           >
             <ArrowRight size={18} />
           </button>

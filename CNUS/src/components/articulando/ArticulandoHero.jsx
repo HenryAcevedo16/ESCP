@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 
 export default function ArticulandoHero({ tag, title, excerpt, image, slug }) {
   return (
@@ -17,7 +17,7 @@ export default function ArticulandoHero({ tag, title, excerpt, image, slug }) {
       </div>
 
       {/* Content */}
-      <div className="relative w-full max-w-[1920px] mx-auto px-4 tablet:px-7.5 desktop:px-20 min-[1610px]:px-29.5 flex flex-col md:flex-row md:justify-between items-stretch md:items-end gap-4 md:gap-0">
+      <div className="relative w-full max-w-[1920px] mx-auto px-4 tablet:px-7.5 laptop:px-20 desktop:px-29.5 flex flex-col md:flex-row md:justify-between items-stretch md:items-end gap-4 md:gap-0">
         {/* Text Box */}
         <div className="flex flex-col justify-center w-full md:w-181.25 md:h-79.5 bg-white/15 backdrop-blur-[9px] border border-white rounded-[20px] p-5 md:px-10 text-white">
           <span className="text-base md:text-[32px] font-normal mb-1 md:mb-2 leading-tight">

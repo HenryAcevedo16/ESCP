@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import { Search, ChevronDown } from "lucide-react";
 import CourseCard from "./CourseCard";
@@ -26,7 +26,7 @@ export default function CursosList({ cursos = [], ejes = [] }) {
   return (
     <div className="w-full">
       {/* Control Bar: Dropdown de Ejes + Buscador juntos al lado derecho en laptop */}
-      <div className="flex flex-col sm:flex-row items-center justify-between min-[1200px]:max-[1609px]:justify-end mb-12 gap-4">
+      <div className="flex flex-col sm:flex-row items-center justify-between laptop:justify-end mb-12 gap-4">
         
         {/* Dropdown de Ejes (Izquierda del Buscador) */}
         <div className="relative w-full sm:w-80 shrink-0">
@@ -65,7 +65,7 @@ export default function CursosList({ cursos = [], ejes = [] }) {
           No se encontraron cursos que coincidan con la búsqueda.
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 desktop:grid-cols-4 min-[1610px]:grid-cols-4 gap-6 gap-y-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 laptop:grid-cols-4 desktop:grid-cols-4 gap-6 gap-y-10">
           {filteredCursos.map((curso) => (
             <CourseCard
               key={curso.id}

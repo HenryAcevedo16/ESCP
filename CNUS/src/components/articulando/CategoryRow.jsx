@@ -1,21 +1,21 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getStrapiImageUrl, formatDate, getAutorNombre } from "@/lib/strapi";
 
-export default function CategoryRow({ id, sectionTitle, categoryArticles = [], bgColor = "bg-[#EFF3F4]" }) {
+export default function CategoryRow({ id, sectionTitle, categoryArticles = [], bgColor = "bg-[#EFF3F4]", verTodasHref = "/articulando" }) {
   if (categoryArticles.length === 0) return null;
 
   return (
     <section id={id} className={`w-full h-auto flex flex-col py-10 md:py-[78px] ${bgColor}`}>
-      <div className="w-full px-4 tablet:px-7.5 desktop:px-20 min-[1610px]:px-29.5 max-w-[1920px] mx-auto">
+      <div className="w-full px-4 tablet:px-7.5 laptop:px-20 desktop:px-29.5 max-w-[1920px] mx-auto">
 
         {/* Título */}
         <div className="flex justify-between items-center mb-6 md:mb-10">
           <h2 className="text-2xl md:text-[34px] font-black text-[#05162D] tracking-[-0.88px]">
             {sectionTitle}
           </h2>
-          <Link href="/articulando" className="text-[#0E52C6] text-sm md:text-[20px] font-medium flex items-center gap-1 md:gap-2 hover:underline shrink-0 ml-4">
+          <Link href={verTodasHref} className="text-[#0E52C6] text-sm md:text-[20px] font-medium flex items-center gap-1 md:gap-2 hover:underline shrink-0 ml-4">
             Ver todo <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
@@ -18,7 +18,7 @@ export default function Navbar({ logoClassName = "" }) {
 
   return (
     <>
-      <nav className={`w-full z-50 text-white flex items-center justify-center transition-all duration-300 px-4 tablet:px-7.5 desktop:px-20 min-[1610px]:px-29.5
+      <nav className={`w-full z-50 text-white flex items-center justify-center transition-all duration-300 px-4 tablet:px-7.5 laptop:px-20 desktop:px-29.5
       ${isScrolled
         ? 'fixed top-0 bg-[#05162D]/90 backdrop-blur-md shadow-xl h-17.5 tablet:h-19.75'
         : 'absolute top-0 bg-transparent h-22.5 tablet:h-29'
@@ -44,10 +44,10 @@ export default function Navbar({ logoClassName = "" }) {
         </Link>
 
         {/* Desktop Links — only visible at 1200px+ */}
-        <div className={`hidden desktop:flex flex-1 items-center justify-center min-[1610px]:justify-between text-[#FFFFFF] font-medium transition-all duration-300
+        <div className={`hidden laptop:flex flex-1 items-center justify-center desktop:justify-between text-[#FFFFFF] font-medium transition-all duration-300
           ${isScrolled
-            ? 'gap-8 min-[1610px]:gap-0 ml-6 mr-6 min-[1610px]:ml-52.25 min-[1610px]:mr-41.75 text-[14px] min-[1610px]:text-[16px]'
-            : 'gap-6 min-[1610px]:gap-0 ml-10 mr-10 min-[1610px]:ml-38 min-[1610px]:mr-41.75 text-[15px] min-[1610px]:text-[20px]'
+            ? 'gap-8 desktop:gap-0 ml-6 mr-6 desktop:ml-52.25 desktop:mr-41.75 text-[14px] desktop:text-[16px]'
+            : 'gap-6 desktop:gap-0 ml-10 mr-10 desktop:ml-38 desktop:mr-41.75 text-[15px] desktop:text-[20px]'
           }`}
         >
           <Link href="/" className="hover:text-blue-200 transition whitespace-nowrap">Inicio</Link>
@@ -62,7 +62,7 @@ export default function Navbar({ logoClassName = "" }) {
           <button
             type="button"
             aria-label="Suscríbete al boletín"
-            className={`hidden desktop:flex items-center justify-center gap-2.5 w-47 bg-primary hover:bg-primary-dark text-[#FFFFFF] rounded-full font-medium transition-all duration-300
+            className={`hidden laptop:flex items-center justify-center gap-2.5 w-47 bg-primary hover:bg-primary-dark text-[#FFFFFF] rounded-full font-medium transition-all duration-300
             ${isScrolled ? 'h-13.75 text-[16px]' : 'h-17.25 text-[20px]'}`}
           >
             Suscríbete
@@ -70,7 +70,7 @@ export default function Navbar({ logoClassName = "" }) {
 
           {/* Hamburger — hidden at 1200px+ */}
           <button 
-            className="desktop:hidden z-50 relative"
+            className="laptop:hidden z-50 relative"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
             aria-expanded={isMenuOpen}
@@ -89,7 +89,7 @@ export default function Navbar({ logoClassName = "" }) {
       {/* Mobile/Tablet Menu Overlay — hidden at 1200px+ */}
       <div 
         id="mobile-navigation"
-        className={`fixed inset-0 bg-[#05162D] text-white z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-300 desktop:hidden ${
+        className={`fixed inset-0 bg-[#05162D] text-white z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-300 laptop:hidden ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >

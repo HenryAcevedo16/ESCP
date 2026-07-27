@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useRef, useEffect } from "react";
 
 export default function EjesFormativosSection({ ejes = [] }) {
@@ -34,11 +34,11 @@ export default function EjesFormativosSection({ ejes = [] }) {
   if (ejes.length === 0) return null;
 
   return (
-    <section className="w-full max-w-[1920px] mb-[200px] mx-auto px-4 tablet:px-[60px] desktop:px-6 py-12 tablet:py-16 min-[1200px]:max-[1609px]:py-16 text-center overflow-hidden bg-[#f8f9fa]">
-      <h2 className="text-[32px] tablet:text-[48px] min-[1200px]:max-[1609px]:text-3xl font-bold text-gray-900 mb-4">
+    <section className="w-full max-w-[1920px] mb-[200px] mx-auto px-4 tablet:px-[60px] laptop:px-6 py-12 tablet:py-16 laptop:py-16 text-center overflow-hidden bg-[#f8f9fa]">
+      <h2 className="text-[32px] tablet:text-[48px] laptop:text-3xl font-bold text-gray-900 mb-4">
         Nuestros Ejes Formativos
       </h2>
-      <p className="text-gray-600 max-w-full mx-auto mb-12 text-[18px] tablet:text-[25px] min-[1200px]:max-[1609px]:text-[18px] leading-snug">
+      <p className="text-gray-600 max-w-full mx-auto mb-12 text-[18px] tablet:text-[25px] laptop:text-[18px] leading-snug">
         Descubre los pilares que orientan nuestro modelo educativo y forman profesionales íntegros,
         preparados para afrontar los{" "}
         <br className="hidden tablet:block" />
@@ -64,9 +64,9 @@ export default function EjesFormativosSection({ ejes = [] }) {
           {items.map((eje, index) => (
             <div
               key={index}
-              className="w-[200px] sm:w-[240px] tablet:w-[280px] desktop:w-[320px] h-[120px] sm:h-[150px] tablet:h-[180px] desktop:h-[200px] bg-gray-100 rounded-2xl hover:bg-gray-200 hover:-translate-y-2 transition-all duration-300 cursor-pointer flex items-center justify-center p-4 sm:p-6 shrink-0 shadow-sm"
+              className="w-[200px] sm:w-[240px] tablet:w-[280px] laptop:w-[320px] h-[120px] sm:h-[150px] tablet:h-[180px] laptop:h-[200px] bg-gray-100 rounded-2xl hover:bg-gray-200 hover:-translate-y-2 transition-all duration-300 cursor-pointer flex items-center justify-center p-4 sm:p-6 shrink-0 shadow-sm"
             >
-              <h3 className="font-bold text-gray-900 text-[16px] sm:text-[18px] tablet:text-[20px] desktop:text-[22px] leading-tight">
+              <h3 className="font-bold text-gray-900 text-[16px] sm:text-[18px] tablet:text-[20px] laptop:text-[22px] leading-tight">
                 {eje.nombre}
               </h3>
             </div>

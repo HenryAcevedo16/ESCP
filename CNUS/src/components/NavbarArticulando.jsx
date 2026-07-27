@@ -18,7 +18,7 @@ export default function NavbarArticulando() {
 
   return (
     <>
-      <nav className={`w-full z-50 text-[#05162D] flex items-center justify-center transition-all duration-300 px-4 tablet:px-7.5 desktop:px-20 min-[1610px]:px-29.5
+      <nav className={`w-full z-50 text-[#05162D] flex items-center justify-center transition-all duration-300 px-4 tablet:px-7.5 laptop:px-20 desktop:px-29.5
       ${isScrolled
         ? 'fixed top-0 bg-[#F2F4F7]/90 backdrop-blur-md shadow-xl h-17.5 tablet:h-19.75'
         : 'absolute top-0 bg-[#F2F4F7] h-22.5 tablet:h-29'
@@ -27,23 +27,27 @@ export default function NavbarArticulando() {
       <div className="w-full max-w-[1920px] relative flex items-center justify-between">
 
         {/* Desktop View — CSS Grid: [left items] [logo] [right items]
-            The 1fr auto 1fr ensures logo is EXACTLY at 50% always */}
-        <div className={`hidden desktop:grid w-full font-medium transition-all duration-300 items-center
+            The 1fr auto 1fr ensures logo is EXACTLY at 50% always.
+            The subscribe button is positioned absolute-right so it doesn't
+            break the left/right balance of the grid columns. */}
+        <div className={`hidden laptop:grid w-full font-medium transition-all duration-300 items-center
           ${isScrolled
-            ? 'text-[12px] min-[1400px]:text-[13px] min-[1610px]:text-[14px]'
-            : 'text-[12px] min-[1400px]:text-[13px] min-[1610px]:text-[15px]'
+            ? 'text-[14px] desktop:text-[16px] gap-8 desktop:gap-0'
+            : 'text-[15px] desktop:text-[20px] gap-6 desktop:gap-0'
           }`}
           style={{ gridTemplateColumns: 'minmax(0, 1fr) auto minmax(0, 1fr)' }}
         >
-          {/* Left column — 3 items spread across left half */}
-          <div className="flex items-center justify-end gap-6 min-[1400px]:gap-8 min-[1610px]:gap-10 pr-6 min-[1400px]:pr-10 min-[1610px]:pr-14">
+          {/* Left column — 3 links */}
+          <div className={`flex items-center justify-end gap-6 desktop:gap-10 ${
+            isScrolled ? 'pr-6 desktop:pr-52.25' : 'pr-10 desktop:pr-38'
+          }`}>
             <Link href="/" className="hover:text-primary transition whitespace-nowrap">
               Inicio
             </Link>
             <Link href="/articulando/notas-del-presidente" className="hover:text-primary transition whitespace-nowrap">
               Notas del presidente
             </Link>
-            <Link href="/articulando#debate" className="hover:text-primary transition whitespace-nowrap">
+            <Link href="/articulando/debate" className="hover:text-primary transition whitespace-nowrap">
               Diálogo, debate y opinión
             </Link>
           </div>
@@ -65,30 +69,24 @@ export default function NavbarArticulando() {
             </div>
           </Link>
 
-          {/* Right column — 3 items + button spread across right half */}
-          <div className="flex items-center justify-start gap-6 min-[1400px]:gap-8 min-[1610px]:gap-10 pl-6 min-[1400px]:pl-10 min-[1610px]:pl-14">
-            <Link href="/articulando#columna-del-director" className="hover:text-primary transition whitespace-nowrap">
+          {/* Right column — 3 links */}
+          <div className={`flex items-center justify-start gap-6 desktop:gap-10 ${
+            isScrolled ? 'pl-6 desktop:pl-41.75' : 'pl-10 desktop:pl-41.75'
+          }`}>
+            <Link href="/articulando/columna-del-director" className="hover:text-primary transition whitespace-nowrap">
               La columna del Director
             </Link>
-            <Link href="/articulando#pensamiento-complejo" className="hover:text-primary transition whitespace-nowrap">
+            <Link href="/articulando/articulos" className="hover:text-primary transition whitespace-nowrap">
               Pensamiento complejo
             </Link>
-            <Link href="/articulando#noticias-y-eventos" className="hover:text-primary transition whitespace-nowrap">
+            <Link href="/articulando/noticias" className="hover:text-primary transition whitespace-nowrap">
               Noticia y eventos
             </Link>
-            <button
-              type="button"
-              aria-label="Suscríbete al boletín"
-              className={`hidden desktop:flex items-center justify-center bg-[#0E52C6] hover:bg-blue-800 text-[#FFFFFF] rounded-full font-medium transition-all duration-300 shrink-0 px-4 min-[1400px]:px-5 min-[1610px]:px-7
-              ${isScrolled ? 'h-10 min-[1610px]:h-13.75' : 'h-11 min-[1610px]:h-17.25'}`}
-            >
-              Suscríbete
-            </button>
           </div>
         </div>
 
         {/* Mobile / Tablet View (<1200px) */}
-        <div className="flex desktop:hidden items-center justify-between w-full">
+        <div className="flex laptop:hidden items-center justify-between w-full">
           <Link href="/articulando" className="flex items-center shrink-0">
             <div className={`relative transition-all duration-300 ${
                 isScrolled
@@ -106,7 +104,7 @@ export default function NavbarArticulando() {
           </Link>
 
           <button 
-            className="desktop:hidden z-50 relative"
+            className="laptop:hidden z-50 relative"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
             aria-expanded={isMenuOpen}
@@ -126,7 +124,7 @@ export default function NavbarArticulando() {
       {/* Mobile/Tablet Menu Overlay */}
       <div 
         id="mobile-navigation-articulando"
-        className={`fixed inset-0 bg-white text-[#05162D] z-40 flex flex-col items-center justify-center gap-6 px-6 text-center transition-transform duration-300 desktop:hidden ${
+        className={`fixed inset-0 bg-white text-[#05162D] z-40 flex flex-col items-center justify-center gap-6 px-6 text-center transition-transform duration-300 laptop:hidden ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -136,27 +134,18 @@ export default function NavbarArticulando() {
         <Link href="/articulando/notas-del-presidente" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
           Notas del presidente
         </Link>
-        <Link href="/articulando#debate" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
+        <Link href="/articulando/debate" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
           Diálogo, debate y opinión
         </Link>
-        <Link href="/articulando#columna-del-director" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
+        <Link href="/articulando/columna-del-director" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
           La columna del Director
         </Link>
-        <Link href="/articulando#pensamiento-complejo" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
+        <Link href="/articulando/articulos" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
           Pensamiento complejo
         </Link>
-        <Link href="/articulando#noticias-y-eventos" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
+        <Link href="/articulando/noticias" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
           Noticia y eventos
         </Link>
-
-        <button 
-          type="button" 
-          aria-label="Suscríbete al boletín" 
-          onClick={() => setIsMenuOpen(false)}
-          className="mt-4 bg-[#0E52C6] hover:bg-blue-800 text-white rounded-full font-medium h-15 px-10 text-[20px] transition-all"
-        >
-          Suscríbete
-        </button>
       </div>
     </>
   );

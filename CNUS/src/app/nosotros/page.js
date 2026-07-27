@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
@@ -68,7 +68,7 @@ export default function NosotrosPage() {
     <main className="w-full bg-white flex flex-col min-h-screen overflow-x-hidden">
       
       {/* ─── BANNER / HERO CON 200PX DE SEPARACIÓN ABAJO ──────────── */}
-      <section className="relative w-full h-[360px] tablet:h-[440px] desktop:h-[480px] flex flex-col overflow-hidden mb-[200px]">
+      <section className="relative w-full h-[360px] tablet:h-[440px] laptop:h-[480px] flex flex-col overflow-hidden mb-[200px]">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')` }}
@@ -76,14 +76,14 @@ export default function NosotrosPage() {
         <div className="absolute inset-0 bg-black/60"></div>
         <Navbar />
         <div className="relative z-10 flex-1 flex items-center justify-center text-center px-4">
-          <h1 className="text-4xl tablet:text-5xl desktop:text-6xl font-light tracking-tight text-white text-center mt-12 tablet:mt-0">
+          <h1 className="text-4xl tablet:text-5xl laptop:text-6xl font-light tracking-tight text-white text-center mt-12 tablet:mt-0">
             Sobre nosotros
           </h1>
         </div>
       </section>
 
       {/* ─── SUB-NAVIGATION TAB BAR (RESPONSIVO PARA CELULARES Y PANTALLAS GRANDES) ─── */}
-      <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] mb-[200px] flex flex-col items-center gap-3">
+      <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] laptop:px-20 laptop:px-[80px] mb-[200px] flex flex-col items-center gap-3">
         
         {/* VISTA PARA CELULARES (sm:hidden) */}
         <div className="flex flex-col items-center gap-3 sm:hidden w-full">
@@ -169,7 +169,7 @@ export default function NosotrosPage() {
       {activeTab === "quienes-somos" && (
         <div className="animate-fadeIn">
           {/* SECCIÓN INTRODUCCIÓN CON MARGEN EXACTO DE NAVBAR (LOGO A HAMBURGUESA) */}
-          <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] mb-[200px]">
+          <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] laptop:px-20 laptop:px-[80px] mb-[200px]">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-[166px]">
               
               {/* Logo emblemático a color */}
@@ -185,7 +185,7 @@ export default function NosotrosPage() {
 
               {/* Texto explicativo */}
               <div className="flex-1 flex flex-col justify-center text-left">
-                <h2 className="text-3xl tablet:text-4xl desktop:text-[44px] font-bold text-[#05162D] leading-tight mb-8">
+                <h2 className="text-3xl tablet:text-4xl laptop:text-[44px] font-bold text-[#05162D] leading-tight mb-8">
                   Un espacio de formación, reflexión y transformación
                 </h2>
                 <p className="text-gray-600 text-base tablet:text-lg leading-relaxed mb-6">
@@ -200,7 +200,7 @@ export default function NosotrosPage() {
 
           {/* MISIÓN Y VISIÓN */}
           <section className="w-full bg-[#f4f6f8] py-20 mb-[200px]">
-            <div className="max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="max-w-[1680px] mx-auto px-4 tablet:px-[60px] laptop:px-20 laptop:px-[80px] grid grid-cols-1 md:grid-cols-2 gap-8">
               
               {/* Tarjeta Misión */}
               <div className="bg-white rounded-[32px] p-8 tablet:p-12 shadow-sm border border-gray-100 flex flex-col gap-6">
@@ -232,9 +232,9 @@ export default function NosotrosPage() {
           </section>
 
           {/* VALORES */}
-          <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] mb-[200px]">
+          <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] laptop:px-20 laptop:px-[80px] mb-[200px]">
             <div className="text-center mb-16">
-              <h2 className="text-3xl tablet:text-4xl desktop:text-5xl font-bold text-[#05162D]">
+              <h2 className="text-3xl tablet:text-4xl laptop:text-5xl font-bold text-[#05162D]">
                 Nuestros valores
               </h2>
             </div>
@@ -257,9 +257,9 @@ export default function NosotrosPage() {
 
           {/* OBJETIVOS ESPECÍFICOS */}
           <section className="w-full bg-[#0B1426] py-20 text-white mb-[200px]">
-            <div className="max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px]">
+            <div className="max-w-[1680px] mx-auto px-4 tablet:px-[60px] laptop:px-20 laptop:px-[80px]">
               <div className="text-center mb-16">
-                <h2 className="text-3xl tablet:text-4xl desktop:text-5xl font-bold text-white">
+                <h2 className="text-3xl tablet:text-4xl laptop:text-5xl font-bold text-white">
                   Objetivos Específicos
                 </h2>
               </div>
@@ -287,9 +287,9 @@ export default function NosotrosPage() {
       {/* ─── TAB 2: PERFIL SOCIOPOLÍTICO ──────────────────────────── */}
       {activeTab === "perfil-sociopolitico" && (
         <div className="animate-fadeIn">
-          <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] mb-[200px]">
+          <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] laptop:px-20 laptop:px-[80px] mb-[200px]">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-3xl tablet:text-4xl desktop:text-5xl font-bold text-[#05162D] mb-6">
+              <h2 className="text-3xl tablet:text-4xl laptop:text-5xl font-bold text-[#05162D] mb-6">
                 Perfil Sociopolítico e Identidad
               </h2>
               <p className="text-gray-600 text-base tablet:text-lg leading-relaxed">
@@ -339,9 +339,9 @@ export default function NosotrosPage() {
       {/* ─── TAB 3: VISIÓN FORMATIVA Y ENFOQUE METODOLÓGICO ──────── */}
       {activeTab === "vision-formativa" && (
         <div className="animate-fadeIn">
-          <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] min-[1200px]:max-[1609px]:px-20 desktop:px-[80px] mb-[200px]">
+          <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] laptop:px-20 laptop:px-[80px] mb-[200px]">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-3xl tablet:text-4xl desktop:text-5xl font-bold text-[#05162D] mb-6">
+              <h2 className="text-3xl tablet:text-4xl laptop:text-5xl font-bold text-[#05162D] mb-6">
                 Visión Formativa y Enfoque Metodológico
               </h2>
               <p className="text-gray-600 text-base tablet:text-lg leading-relaxed">

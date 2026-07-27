@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -271,7 +271,7 @@ export default function AudienceSection() {
       <div 
         ref={scrollRef}
         onScroll={handleScroll}
-        className="flex overflow-x-auto pb-10 snap-x snap-mandatory items-center [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none max-desktop:px-4!"
+        className="flex overflow-x-auto pb-10 snap-x snap-mandatory items-center [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none max-laptop:px-4!"
         style={{
           paddingLeft: `max(1rem, calc(50vw - ${dimsRef.current.pad}px))`,
           paddingRight: `max(1rem, calc(50vw - ${dimsRef.current.pad}px))`,
@@ -281,13 +281,13 @@ export default function AudienceSection() {
           // CONTENEDOR FIJO: Evita que el layout salte (thrashing) durante la animación
           <div 
             key={i} 
-            className="flex items-center justify-center shrink-0 snap-center h-175 max-desktop:w-screen! max-desktop:h-125!"
+            className="flex items-center justify-center shrink-0 snap-center h-175 max-laptop:w-screen! max-laptop:h-125!"
             style={{ width: `${dimsRef.current.maxDistance}px` }}
           >
             {/* TARJETA ANIMADA: Cambia de tamaño libremente dentro de su contenedor fijo */}
             <div 
               ref={el => cardsRef.current[i] = el}
-              className="relative rounded-[40px] overflow-hidden shadow-xl origin-center will-change-[width,height,opacity] max-desktop:w-[90vw]! max-desktop:h-112.5!"
+              className="relative rounded-[40px] overflow-hidden shadow-xl origin-center will-change-[width,height,opacity] max-laptop:w-[90vw]! max-laptop:h-112.5!"
               style={{
                 width: i === 0 ? '1218px' : '1051px',
                 height: i === 0 ? '663px' : '571px',
@@ -310,7 +310,7 @@ export default function AudienceSection() {
                 <>
                   <div 
                     ref={el => bannersRef.current[i] = el}
-                    className="absolute bottom-6 left-6 tablet:bottom-8 tablet:left-8 bg-[#05162D] p-6 tablet:p-10 rounded-3xl tablet:rounded-4xl flex flex-col tablet:flex-row gap-4 tablet:gap-8 items-start shadow-2xl will-change-[width,height] max-desktop:w-[calc(100%-3rem)]! max-desktop:h-auto!"
+                    className="absolute bottom-6 left-6 tablet:bottom-8 tablet:left-8 bg-[#05162D] p-6 tablet:p-10 rounded-3xl tablet:rounded-4xl flex flex-col tablet:flex-row gap-4 tablet:gap-8 items-start shadow-2xl will-change-[width,height] max-laptop:w-[calc(100%-3rem)]! max-laptop:h-auto!"
                     style={{
                       width: i === 0 ? '882px' : '715px',
                       height: i === 0 ? '278px' : '140px',
@@ -323,7 +323,7 @@ export default function AudienceSection() {
                       <h3 className="text-white font-bold text-[22px] tablet:text-[32px] leading-tight mb-2 tablet:mb-0">{slide.title}</h3>
                       <p 
                         ref={el => descriptionsRef.current[i] = el}
-                        className="text-gray-300 text-[14px] tablet:text-[18px] line-clamp-2 overflow-hidden will-change-[height,opacity,margin] max-desktop:h-auto! max-desktop:opacity-100! max-desktop:mt-0!"
+                        className="text-gray-300 text-[14px] tablet:text-[18px] line-clamp-2 overflow-hidden will-change-[height,opacity,margin] max-laptop:h-auto! max-laptop:opacity-100! max-laptop:mt-0!"
                         style={{
                           opacity: i === 0 ? 1 : 0,
                           height: i === 0 ? '28px' : '0px',

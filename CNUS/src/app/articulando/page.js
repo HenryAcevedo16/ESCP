@@ -63,12 +63,14 @@ export default async function ArticulandoPage() {
           id="noticias-y-eventos"
           sectionTitle="Noticias"
           categoryArticles={Array.isArray(noticiasData) ? noticiasData : []}
+          verTodasHref="/articulando/noticias"
         />
         <CategoryRow
           id="pensamiento-complejo"
           sectionTitle="Artículos"
           categoryArticles={Array.isArray(articulosData) ? articulosData : []}
           bgColor="bg-white"
+          verTodasHref="/articulando/articulos"
         />
       </div>
     </main>
