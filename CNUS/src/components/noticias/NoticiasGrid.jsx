@@ -136,11 +136,11 @@ function NoticiaCard({ noticia }) {
       href={`/articulando/${noticia.slug}`}
       className="group flex flex-col bg-white border border-[#E8ECF0] rounded-[20px] laptop:rounded-[28px] overflow-hidden hover:shadow-[0_12px_48px_rgba(5,22,45,0.10)] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
     >
-      <div className="w-full h-1 bg-gradient-to-r from-[#F59E0B] to-[#FBBF24] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="w-full h-1 bg-gradient-to-r from-[#06B6D4] to-[#22D3EE] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       <div className="flex flex-col flex-1 p-5 laptop:p-7 desktop:p-8">
         <div className="flex items-center gap-2 flex-wrap mb-4">
-          <span className="inline-block text-[11px] laptop:text-[13px] font-semibold px-3 py-1 rounded-full bg-[#F59E0B]/10 text-[#D97706]">
+          <span className="inline-block text-[11px] laptop:text-[13px] font-semibold px-3 py-1 rounded-full bg-[#06B6D4]/10 text-[#0891B2]">
             {noticia.categoria}
           </span>
           <span className="text-[#A0A4A8] text-[11px] laptop:text-[13px]">
@@ -148,7 +148,7 @@ function NoticiaCard({ noticia }) {
           </span>
         </div>
 
-        <h3 className="font-bold text-[#05162D] text-base laptop:text-[20px] desktop:text-[22px] leading-snug tracking-tight mb-3 line-clamp-3 group-hover:text-[#D97706] transition-colors">
+        <h3 className="font-bold text-[#05162D] text-base laptop:text-[20px] desktop:text-[22px] leading-snug tracking-tight mb-3 line-clamp-3 group-hover:text-[#0891B2] transition-colors">
           {noticia.titulo}
         </h3>
 
@@ -160,7 +160,7 @@ function NoticiaCard({ noticia }) {
           <span className="text-[#777C82] text-xs laptop:text-[14px]">
             {noticia.fecha}
           </span>
-          <span className="flex items-center gap-1 text-[#D97706] font-semibold text-xs laptop:text-[14px] opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <span className="flex items-center gap-1 text-[#0891B2] font-semibold text-xs laptop:text-[14px] opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             Leer
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
               <path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -210,7 +210,7 @@ export default function NoticiasGrid() {
             onClick={() => handlePage(currentPage - 1)}
             disabled={currentPage === 1}
             aria-label="Página anterior"
-            className="flex items-center justify-center w-10 h-10 laptop:w-12 laptop:h-12 rounded-full border border-[#E0E4EA] text-[#05162D] hover:border-[#D97706] hover:text-[#D97706] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+            className="flex items-center justify-center w-10 h-10 laptop:w-12 laptop:h-12 rounded-full border border-[#E0E4EA] text-[#05162D] hover:border-[#0891B2] hover:text-[#0891B2] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
           >
             <ArrowLeft size={18} />
           </button>
@@ -223,8 +223,8 @@ export default function NoticiasGrid() {
               aria-current={currentPage === page ? "page" : undefined}
               className={`flex items-center justify-center w-10 h-10 laptop:w-12 laptop:h-12 rounded-full font-semibold text-sm laptop:text-[16px] transition-all duration-200 ${
                 currentPage === page
-                  ? "bg-[#D97706] text-white shadow-md shadow-amber-200"
-                  : "border border-[#E0E4EA] text-[#05162D] hover:border-[#D97706] hover:text-[#D97706]"
+                  ? "bg-[#0891B2] text-white shadow-md shadow-cyan-200"
+                  : "border border-[#E0E4EA] text-[#05162D] hover:border-[#0891B2] hover:text-[#0891B2]"
               }`}
             >
               {page}
@@ -235,7 +235,7 @@ export default function NoticiasGrid() {
             onClick={() => handlePage(currentPage + 1)}
             disabled={currentPage === totalPages}
             aria-label="Página siguiente"
-            className="flex items-center justify-center w-10 h-10 laptop:w-12 laptop:h-12 rounded-full border border-[#E0E4EA] text-[#05162D] hover:border-[#D97706] hover:text-[#D97706] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+            className="flex items-center justify-center w-10 h-10 laptop:w-12 laptop:h-12 rounded-full border border-[#E0E4EA] text-[#05162D] hover:border-[#0891B2] hover:text-[#0891B2] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
           >
             <ArrowRight size={18} />
           </button>

@@ -20,34 +20,31 @@ export default function NavbarArticulando() {
     <>
       <nav className={`w-full z-50 text-[#05162D] flex items-center justify-center transition-all duration-300 px-4 tablet:px-7.5 laptop:px-20 desktop:px-29.5
       ${isScrolled
-        ? 'fixed top-0 bg-[#F2F4F7]/90 backdrop-blur-md shadow-xl h-17.5 tablet:h-19.75'
+        ? 'fixed top-0 bg-[#F2F4F7]/90 backdrop-blur-md h-17.5 tablet:h-19.75'
         : 'absolute top-0 bg-[#F2F4F7] h-22.5 tablet:h-29'
       }`}
     >
       <div className="w-full max-w-[1920px] relative flex items-center justify-between">
 
-        {/* Desktop View — CSS Grid: [left items] [logo] [right items]
-            The 1fr auto 1fr ensures logo is EXACTLY at 50% always.
-            The subscribe button is positioned absolute-right so it doesn't
-            break the left/right balance of the grid columns. */}
+        {/* Desktop View — Grid Layout for absolute symmetry */}
         <div className={`hidden laptop:grid w-full font-medium transition-all duration-300 items-center
           ${isScrolled
-            ? 'text-[14px] desktop:text-[16px] gap-8 desktop:gap-0'
-            : 'text-[15px] desktop:text-[20px] gap-6 desktop:gap-0'
+            ? 'text-[14px] desktop:text-[16px]'
+            : 'text-[15px] desktop:text-[20px]'
           }`}
           style={{ gridTemplateColumns: 'minmax(0, 1fr) auto minmax(0, 1fr)' }}
         >
-          {/* Left column — 3 links */}
-          <div className={`flex items-center justify-end gap-6 desktop:gap-10 ${
-            isScrolled ? 'pr-6 desktop:pr-52.25' : 'pr-10 desktop:pr-38'
+          {/* Left column — min-w-0 es crucial para que no rompa el ancho del grid */}
+          <div className={`flex items-center justify-between w-full min-w-0 ${
+            isScrolled ? 'pr-8 desktop:pr-16' : 'pr-10 desktop:pr-20'
           }`}>
-            <Link href="/" className="hover:text-primary transition whitespace-nowrap">
+            <Link href="/" className="hover:text-primary transition whitespace-nowrap shrink-0">
               Inicio
             </Link>
-            <Link href="/articulando/notas-del-presidente" className="hover:text-primary transition whitespace-nowrap">
+            <Link href="/articulando/notas-del-presidente" className="hover:text-primary transition whitespace-nowrap truncate">
               Notas del presidente
             </Link>
-            <Link href="/articulando/debate" className="hover:text-primary transition whitespace-nowrap">
+            <Link href="/articulando/debate" className="hover:text-primary transition whitespace-nowrap truncate">
               Diálogo, debate y opinión
             </Link>
           </div>
@@ -69,18 +66,18 @@ export default function NavbarArticulando() {
             </div>
           </Link>
 
-          {/* Right column — 3 links */}
-          <div className={`flex items-center justify-start gap-6 desktop:gap-10 ${
-            isScrolled ? 'pl-6 desktop:pl-41.75' : 'pl-10 desktop:pl-41.75'
+          {/* Right column — justify-between para balancear simétricamente con el lado izquierdo */}
+          <div className={`flex items-center justify-between w-full min-w-0 ${
+            isScrolled ? 'pl-8 desktop:pl-16' : 'pl-10 desktop:pl-20'
           }`}>
-            <Link href="/articulando/columna-del-director" className="hover:text-primary transition whitespace-nowrap">
+            <Link href="/articulando/columna-del-director" className="hover:text-primary transition whitespace-nowrap truncate">
               La columna del Director
             </Link>
-            <Link href="/articulando/articulos" className="hover:text-primary transition whitespace-nowrap">
+            <Link href="/articulando/articulos" className="hover:text-primary transition whitespace-nowrap truncate">
               Pensamiento complejo
             </Link>
-            <Link href="/articulando/noticias" className="hover:text-primary transition whitespace-nowrap">
-              Noticia y eventos
+            <Link href="/articulando/noticias" className="hover:text-primary transition whitespace-nowrap shrink-0">
+              Noticias y eventos
             </Link>
           </div>
         </div>

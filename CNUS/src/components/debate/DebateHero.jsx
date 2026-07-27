@@ -51,17 +51,19 @@ export default function DebateHero() {
               </div>
               <span className="text-white/40 text-sm mt-3 z-10">Reproducir video</span>
 
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 laptop:p-10">
-                <div className="flex items-center gap-2 text-[#4A8EFF] text-xs font-semibold uppercase tracking-widest mb-2">
-                  <MessageCircle size={14} />
-                  Debate del momento
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent w-full">
+                <div className="w-full max-w-[1920px] mx-auto px-4 tablet:px-7.5 laptop:px-20 desktop:px-29.5 pb-6 laptop:pb-10 pt-10">
+                  <div className="flex items-center gap-2 text-[#4A8EFF] text-xs font-semibold uppercase tracking-widest mb-2">
+                    <MessageCircle size={14} />
+                    Debate del momento
+                  </div>
+                  <h1 className="text-white text-xl laptop:text-3xl desktop:text-4xl font-bold leading-tight max-w-3xl">
+                    {ACTIVE_DEBATE.pregunta}
+                  </h1>
+                  <p className="text-white/50 text-sm laptop:text-base mt-3 max-w-2xl line-clamp-2">
+                    {ACTIVE_DEBATE.contexto}
+                  </p>
                 </div>
-                <h1 className="text-white text-xl laptop:text-3xl desktop:text-4xl font-bold leading-tight max-w-3xl">
-                  {ACTIVE_DEBATE.pregunta}
-                </h1>
-                <p className="text-white/50 text-sm laptop:text-base mt-3 max-w-2xl line-clamp-2">
-                  {ACTIVE_DEBATE.contexto}
-                </p>
               </div>
             </div>
           ) : (

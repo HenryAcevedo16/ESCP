@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
@@ -83,7 +83,7 @@ export default function NosotrosPage() {
       </section>
 
       {/* ─── SUB-NAVIGATION TAB BAR (RESPONSIVO PARA CELULARES Y PANTALLAS GRANDES) ─── */}
-      <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] laptop:px-20 laptop:px-[80px] mb-[200px] flex flex-col items-center gap-3">
+      <section className="w-full max-w-[1680px] mx-auto px-4 tablet:px-[60px] laptop:px-20 laptop:px-[80px] mb-[100px] flex flex-col items-center gap-3">
         
         {/* VISTA PARA CELULARES (sm:hidden) */}
         <div className="flex flex-col items-center gap-3 sm:hidden w-full">

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState } from "react";
 import Image from "next/image";
 import { Mail } from "lucide-react";
@@ -15,10 +15,10 @@ export default function NewsletterSection() {
 
   return (
     <section className="max-w-[1680px] w-full mx-auto px-4 tablet:px-15 laptop:px-20 desktop:px-6 py-20 laptop:pt-0 laptop:pb-0 mb-[200px]">
-      <div className="flex flex-col laptop:flex-row rounded-3xl overflow-hidden bg-[#0045A5]">
+      <div className="flex flex-col laptop:flex-row rounded-3xl overflow-hidden bg-[#0045A5] laptop:h-[719px]">
         
         {/* Left Side: Image */}
-        <div className="laptop:w-1/2 relative h-70 tablet:h-90 laptop:h-auto laptop:min-h-[360px]">
+        <div className="laptop:w-1/2 relative h-70 tablet:h-90 laptop:h-full">
           <Image 
             src="/imagenes/nwslate.png" 
             alt="Mantente conectado"
