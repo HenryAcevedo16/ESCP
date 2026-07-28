@@ -133,9 +133,10 @@ async function findOrCreate(strapi, uid, where, data) {
 
 async function seedCategorias(strapi) {
   const datos = [
-    { nombre: 'Noticias',             slug: 'noticias',             orden: 1 },
-    { nombre: 'Artículos',            slug: 'articulos',            orden: 2 },
+    { nombre: 'Noticias y Eventos',   slug: 'noticias-y-eventos',   orden: 1 },
+    { nombre: 'Pensamiento Complejo', slug: 'pensamiento-complejo', orden: 2 },
     { nombre: 'Notas del presidente', slug: 'notas-del-presidente', orden: 3 },
+    { nombre: 'Columna del director', slug: 'columna-del-director', orden: 4 },
   ];
 
   const result = {};
@@ -241,105 +242,116 @@ async function seedAutor(strapi) {
 
 async function seedArticulos(strapi, categorias, tags, autor) {
   const hoy = new Date().toISOString().split('T')[0];
-
-  const datos = [
-    {
-      slug:              'escp-inicia-diplomado-liderazgo-sindical',
-      titulo:            'ESCP inicia nuevo Diplomado en Liderazgo Sindical y Acción Sociopolítica',
-      extracto:          'Un nuevo programa formativo para fortalecer el liderazgo sindical, el diálogo social y la incidencia sociopolítica en la República Dominicana.',
-      contenido:         '<p>La Escuela CNUS de Sindicalismo Sociopolítico anuncia el inicio de su nuevo Diplomado en Liderazgo Sindical y Acción Sociopolítica, diseñado para formar dirigentes con herramientas sólidas para la negociación colectiva, el diálogo social y la incidencia política.</p><p>Este programa representa un paso significativo en nuestra misión de fortalecer el movimiento sindical dominicano con formación de calidad, accesible y orientada a la transformación social.</p>',
-      fecha_publicacion: hoy,
-      destacado:         true,
-      categoriaSlug:     'noticias',
-      tagIndices:        [0, 2],
-    },
-    {
-      slug:              'mujeres-lideran-jornada-negociacion',
-      titulo:            'Mujeres lideran jornada de formación sobre negociación y diálogo social',
-      extracto:          'Más de 80 mujeres sindicalistas participaron en la jornada de formación organizada por la ESCP.',
-      contenido:         '<p>En el marco del compromiso de la ESCP con la equidad de género, más de 80 mujeres sindicalistas de distintas federaciones participaron en una jornada intensiva de formación sobre técnicas de negociación colectiva y diálogo social.</p>',
-      fecha_publicacion: hoy,
-      destacado:         false,
-      categoriaSlug:     'noticias',
-      tagIndices:        [6, 1],
-    },
-    {
-      slug:              'sindicalismo-politicas-publicas-laborales',
-      titulo:            'El papel del sindicalismo en la construcción de políticas públicas laborales',
-      extracto:          'Un análisis sobre cómo los sindicatos pueden incidir efectivamente en la formulación de políticas públicas que beneficien a los trabajadores.',
-      contenido:         '<p>Los sindicatos tienen un papel fundamental en la construcción de políticas públicas que protejan los derechos de los trabajadores. Este artículo analiza los mecanismos de participación disponibles y cómo maximizar su efectividad.</p>',
-      fecha_publicacion: hoy,
-      destacado:         false,
-      categoriaSlug:     'articulos',
-      tagIndices:        [4, 0],
-    },
-    {
-      slug:              'nota-presidente-compromisos-segundo-semestre-2026',
-      titulo:            'Nota del Presidente: Compromisos para el segundo semestre de 2026',
-      extracto:          'El presidente de la CNUS presenta los compromisos y objetivos del movimiento sindical para el segundo semestre del año.',
-      contenido:         '<p>Como movimiento sindical comprometido con la justicia social y el trabajo decente, presentamos nuestros compromisos para el segundo semestre de 2026, enfocados en fortalecer la organización sindical a nivel nacional.</p>',
-      fecha_publicacion: hoy,
-      destacado:         false,
-      categoriaSlug:     'notas-del-presidente',
-      tagIndices:        [0, 3],
-    },
-  ];
-
   const creados = [];
-  for (const d of datos) {
-    const existing = await strapi.documents('api::articulo.articulo').findFirst({
-      filters: { slug: { $eq: d.slug } },
-    });
-    if (existing) { creados.push(existing); continue; }
 
-    const data = {
-      titulo:            d.titulo,
-      slug:              d.slug,
-      extracto:          d.extracto,
-      contenido:         d.contenido,
-      fecha_publicacion: d.fecha_publicacion,
-      destacado:         d.destacado,
-    };
+  const categorySlugs = ['noticias-y-eventos', 'pensamiento-complejo', 'notas-del-presidente', 'columna-del-director'];
 
-    const cat = categorias[d.categoriaSlug];
-    if (cat?.documentId) data.categoria = cat.documentId;
-    if (autor?.documentId) data.autor = autor.documentId;
+  for (const catSlug of categorySlugs) {
+    for (let i = 1; i <= 6; i++) {
+      const slug = `prueba-${catSlug}-${i}`;
+      const existing = await strapi.documents('api::articulo.articulo').findFirst({
+        filters: { slug: { $eq: slug } },
+      });
+      if (existing) {
+        creados.push(existing);
+        continue;
+      }
 
-    const tagIds = d.tagIndices
-      .map((i) => tags[i]?.documentId)
-      .filter(Boolean);
-    if (tagIds.length) data.tags = tagIds;
+      const data = {
+        titulo: `Artículo de prueba ${i} para ${catSlug}`,
+        slug: slug,
+        extracto: `Este es un extracto generado automáticamente para el artículo ${i} de la categoría ${catSlug}.`,
+        contenido: `<p>Contenido completo del artículo de prueba ${i} en la categoría <strong>${catSlug}</strong>. Este es texto de relleno para verificar que la integración dinámica funciona correctamente en el frontend.</p>`,
+        fecha_publicacion: hoy,
+        destacado: i === 1,
+      };
 
-    const art = await strapi.documents('api::articulo.articulo').create({
-      data,
-      status: 'published',
-    });
-    creados.push(art);
+      const cat = categorias[catSlug];
+      if (cat?.documentId) data.categoria = cat.documentId;
+      if (autor?.documentId) data.autor = autor.documentId;
+
+      const art = await strapi.documents('api::articulo.articulo').create({
+        data,
+        status: 'published',
+      });
+      creados.push(art);
+    }
   }
 
-  strapi.log.info('[seed] Artículos listos ✅');
+  strapi.log.info('[seed] Artículos inyectados ✅');
   return creados;
 }
 
 // ─── 7. DEBATE ────────────────────────────────────────────────────────────────
 
 async function seedDebate(strapi, articulos) {
-  const existing = await strapi.documents('api::debate.debate').findFirst();
-  if (existing) {
-    strapi.log.info('[seed] Debate ya existe ✅');
-    return;
+  const debatesData = [
+    {
+      slug: 'indexacion-salario-minimo',
+      pregunta: '¿Debería el salario mínimo en República Dominicana indexarse automáticamente a la inflación?',
+      contexto: 'Actualmente el salario mínimo se revisa cada dos años mediante negociación tripartita. Sectores sindicales proponen una indexación automática que garantice el poder adquisitivo, mientras que sectores empresariales advierten sobre el impacto en la generación de empleo.',
+      participantes: 184,
+      respuestas: 247,
+      activo: true,
+      fecha_cierre: new Date().toISOString().split('T')[0]
+    },
+    {
+      slug: 'efectividad-huelga-herramienta-presion',
+      pregunta: '¿Es efectiva la huelga como herramienta de presión en el contexto laboral actual?',
+      contexto: 'Debate sobre la huelga en tiempos modernos y su efectividad real frente a otras formas de protesta.',
+      participantes: 198,
+      respuestas: 312,
+      activo: false,
+      fecha_cierre: '2026-07-01'
+    },
+    {
+      slug: 'regulacion-trabajo-plataformas-digitales',
+      pregunta: '¿Debería regularse el trabajo en plataformas digitales como Uber y Rappi?',
+      contexto: 'Discusión sobre la necesidad de otorgar derechos laborales plenos a los trabajadores de plataformas.',
+      participantes: 176,
+      respuestas: 289,
+      activo: false,
+      fecha_cierre: '2026-06-01'
+    },
+    {
+      slug: 'reforma-pensiones-pilar-solidario',
+      pregunta: '¿La reforma de pensiones debe incluir un pilar solidario financiado por el Estado?',
+      contexto: 'Análisis sobre la necesidad de un sistema de pensiones más justo e inclusivo.',
+      participantes: 162,
+      respuestas: 245,
+      activo: false,
+      fecha_cierre: '2026-05-01'
+    },
+    {
+      slug: 'teletrabajo-ley-sectorial-convenio-colectivo',
+      pregunta: '¿El teletrabajo debe regularse por ley sectorial o por convenio colectivo?',
+      contexto: 'El auge del teletrabajo y cómo debe regularse para evitar la sobreexplotación.',
+      participantes: 134,
+      respuestas: 198,
+      activo: false,
+      fecha_cierre: '2026-04-01'
+    },
+    {
+      slug: 'salario-minimo-diferenciado-sectores',
+      pregunta: '¿Es necesario un salario mínimo diferenciado por sectores económicos?',
+      contexto: 'Debate sobre la viabilidad de adaptar el salario mínimo a la rentabilidad de cada sector.',
+      participantes: 181,
+      respuestas: 267,
+      activo: false,
+      fecha_cierre: '2026-03-01'
+    }
+  ];
+
+  for (const d of debatesData) {
+    const existing = await strapi.documents('api::debate.debate').findFirst({
+      filters: { slug: { $eq: d.slug } },
+    });
+    if (existing) continue;
+
+    await strapi.documents('api::debate.debate').create({ data: d });
   }
 
-  const data = {
-    pregunta: '¿Considera usted que la formación sindical es clave para el desarrollo laboral en la República Dominicana?',
-    activo: true,
-  };
-
-  const articulo = articulos[0];
-  if (articulo?.documentId) data.articulo_relacionado = articulo.documentId;
-
-  await strapi.documents('api::debate.debate').create({ data });
-  strapi.log.info('[seed] Debate creado ✅');
+  strapi.log.info('[seed] Debates listos ✅');
 }
 
 // ─── 8. PROGRAMAS ─────────────────────────────────────────────────────────────

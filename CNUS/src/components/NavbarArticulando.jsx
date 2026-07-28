@@ -73,10 +73,10 @@ export default function NavbarArticulando() {
             <Link href="/articulando/columna-del-director" className="hover:text-primary transition whitespace-nowrap truncate">
               La columna del Director
             </Link>
-            <Link href="/articulando/articulos" className="hover:text-primary transition whitespace-nowrap truncate">
+            <Link href="/articulando/pensamiento-complejo" className="hover:text-primary transition whitespace-nowrap truncate">
               Pensamiento complejo
             </Link>
-            <Link href="/articulando/noticias" className="hover:text-primary transition whitespace-nowrap shrink-0">
+            <Link href="/articulando/noticias-y-eventos" className="hover:text-primary transition whitespace-nowrap shrink-0">
               Noticias y eventos
             </Link>
           </div>
@@ -128,29 +128,22 @@ export default function NavbarArticulando() {
         <Link href="/" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
           Inicio
         </Link>
-        <Link href="/articulando/notas-del-presidente" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
-          Notas del presidente
-        </Link>
         <Link href="/articulando/debate" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
           Diálogo, debate y opinión
         </Link>
-        <Link href="/articulando/columna-del-director" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
-          La columna del Director
+        <Link href="/articulando/notas-del-presidente" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
+          Notas del presidente
         </Link>
-        <Link href="/articulando/articulos" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
+        <Link href="/articulando/pensamiento-complejo" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
           Pensamiento complejo
         </Link>
-        <Link href="/articulando/noticias" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
-          Noticia y eventos
+        <Link href="/articulando/columna-del-director" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
+          Columna del director
+        </Link>
+        <Link href="/articulando/noticias-y-eventos" onClick={() => setIsMenuOpen(false)} className="text-xl font-medium hover:text-primary transition">
+          Noticias y eventos
         </Link>
       </div>
     </>
   );
 }
-
-
-
-
-
-
-

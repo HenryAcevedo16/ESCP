@@ -1,23 +1,23 @@
 import NavbarArticulando from "@/components/NavbarArticulando";
-import ColumnaDirectorHero from "@/components/columna-director/ColumnaDirectorHero";
-import ColumnaDirectorGrid from "@/components/columna-director/ColumnaDirectorGrid";
+import NoticiasHero from "@/components/noticias/NoticiasHero";
+import NoticiasGrid from "@/components/noticias/NoticiasGrid";
 import { getArticulosPorCategoriaPaginado, getArticulosPorCategoria } from "@/lib/strapi";
 
 export const metadata = {
-  title: "La Columna del Director | Articulando | ESCP",
+  title: "Noticias y Eventos | Articulando | ESCP",
   description:
-    "Artículos, reflexiones y posicionamientos personales del director de la Escuela Sindical del Caribe y Postgraduados (ESCP).",
+    "Últimas noticias, eventos y actividades de la Escuela Sindical del Caribe y Postgraduados (ESCP) y del movimiento sindical dominicano e internacional.",
 };
 
 const PAGE_SIZE = 6;
 
-export default async function ColumnaDirectorPage({ searchParams }) {
+export default async function NoticiasPage({ searchParams }) {
   const params = await searchParams;
   const page = Math.max(1, parseInt(params?.page ?? '1', 10));
 
   const [featuredData, pageData] = await Promise.all([
-    getArticulosPorCategoria("columna-del-director", 1),
-    getArticulosPorCategoriaPaginado("columna-del-director", page, PAGE_SIZE),
+    getArticulosPorCategoria("noticias-y-eventos", 1),
+    getArticulosPorCategoriaPaginado("noticias-y-eventos", page, PAGE_SIZE),
   ]);
 
   const featured = Array.isArray(featuredData) ? featuredData[0] ?? null : null;
@@ -25,14 +25,15 @@ export default async function ColumnaDirectorPage({ searchParams }) {
   return (
     <main className="flex min-h-screen flex-col w-full bg-white">
       <NavbarArticulando />
-      <ColumnaDirectorHero featuredNote={featured} />
-      <ColumnaDirectorGrid
+      <NoticiasHero featuredNote={featured} />
+      <NoticiasGrid
         notas={pageData.data}
         currentPage={page}
         pageCount={pageData.pageCount}
         total={pageData.total}
-        basePath="/articulando/columna-del-director"
+        basePath="/articulando/noticias-y-eventos"
       />
     </main>
   );
 }
+

@@ -1,12 +1,20 @@
-﻿"use client";
-import { useState } from "react";
-import { Search, ChevronDown } from "lucide-react";
+"use client";
+import { useState, useEffect } from "react";
+import { Search, ChevronDown, ArrowLeft, ArrowRight } from "lucide-react";
 import CourseCard from "./CourseCard";
-import Pagination from "../ui/Pagination";
+
+const ITEMS_PER_PAGE = 9;
+
 
 export default function CursosList({ cursos = [], ejes = [] }) {
   const [selectedEje, setSelectedEje] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Reset page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedEje, searchTerm]);
 
   const filteredCursos = cursos.filter((curso) => {
     // Filtro por Eje
@@ -22,6 +30,16 @@ export default function CursosList({ cursos = [], ejes = [] }) {
 
     return matchesEje && matchesSearch;
   });
+
+  const totalPages = Math.ceil(filteredCursos.length / ITEMS_PER_PAGE);
+  const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+  const visibleCursos = filteredCursos.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+
+  const handlePage = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
 
   return (
     <div className="w-full">
@@ -65,8 +83,8 @@ export default function CursosList({ cursos = [], ejes = [] }) {
           No se encontraron cursos que coincidan con la búsqueda.
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 laptop:grid-cols-4 desktop:grid-cols-4 gap-6 gap-y-10">
-          {filteredCursos.map((curso) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 laptop:grid-cols-3 gap-6 laptop:gap-8 gap-y-10 laptop:gap-y-12">
+          {visibleCursos.map((curso) => (
             <CourseCard
               key={curso.id}
               titulo={curso.titulo}
@@ -79,7 +97,45 @@ export default function CursosList({ cursos = [], ejes = [] }) {
         </div>
       )}
 
-      <Pagination />
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-2 laptop:gap-3 mt-16 mb-8">
+          <button
+            onClick={() => handlePage(currentPage - 1)}
+            disabled={currentPage === 1}
+            aria-label="Página anterior"
+            className="flex items-center justify-center w-10 h-10 laptop:w-12 laptop:h-12 rounded-full border border-[#E0E4EA] text-[#05162D] hover:border-[#0891B2] hover:text-[#0891B2] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+          >
+            <ArrowLeft size={18} />
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              onClick={() => handlePage(page)}
+              aria-label={`Página ${page}`}
+              aria-current={currentPage === page ? "page" : undefined}
+              className={`flex items-center justify-center w-10 h-10 laptop:w-12 laptop:h-12 rounded-full font-semibold text-sm laptop:text-[16px] transition-all duration-200 ${
+                currentPage === page
+                  ? "bg-[#0891B2] text-white shadow-md shadow-cyan-200"
+                  : "border border-[#E0E4EA] text-[#05162D] hover:border-[#0891B2] hover:text-[#0891B2]"
+              }`}
+            >
+              {page}
+            </button>
+          ))}
+
+          <button
+            onClick={() => handlePage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            aria-label="Página siguiente"
+            className="flex items-center justify-center w-10 h-10 laptop:w-12 laptop:h-12 rounded-full border border-[#E0E4EA] text-[#05162D] hover:border-[#0891B2] hover:text-[#0891B2] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+          >
+            <ArrowRight size={18} />
+          </button>
+        </div>
+      )}
+
     </div>
   );
 }

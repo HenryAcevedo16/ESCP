@@ -1,16 +1,13 @@
+import Image from "next/image";
 import Link from "next/link";
+import { formatDate, getAutorNombre, getStrapiImageUrl } from "@/lib/strapi";
 
-const FEATURED_ARTICLE = {
-  id: 1,
-  titulo: "El sindicalismo en la era digital: desafíos y oportunidades para la clase trabajadora",
-  extracto:
-    "La transformación digital del mundo del trabajo plantea interrogantes fundamentales para el movimiento sindical. ¿Cómo organizar a trabajadores de plataformas? ¿Qué nuevos derechos necesitamos? Un análisis profundo desde la experiencia dominicana.",
-  fecha: "22 de julio de 2026",
-  categoria: "Análisis",
-  slug: "sindicalismo-era-digital-desafios-oportunidades",
-};
+export default function ArticulosHero({ featuredNote }) {
+  if (!featuredNote) return null;
 
-export default function ArticulosHero() {
+  const autorNombre = getAutorNombre(featuredNote.autor) || "Biblioteca ESCP";
+  const avatarUrl = getStrapiImageUrl(featuredNote.autor?.avatar);
+
   return (
     <section className="relative w-full overflow-hidden bg-gradient-to-br from-[#05162D] via-[#1A2A3A] to-[#2D4A5E] mb-16 laptop:mb-32 desktop:mb-50">
       <div className="w-full h-1.5 bg-gradient-to-r from-[#06B6D4] via-[#22D3EE] to-[#06B6D4]" />
@@ -19,9 +16,9 @@ export default function ArticulosHero() {
         <div className="flex flex-col laptop:flex-row items-center gap-10 laptop:gap-16 desktop:gap-24 py-14 laptop:py-20 desktop:py-28">
           <div className="flex flex-col flex-1 text-white order-2 laptop:order-1">
             <h1 className="text-4xl laptop:text-[56px] desktop:text-[72px] font-black leading-none tracking-[-1.5px] desktop:tracking-[-2px] mb-6 laptop:mb-8">
-              Artículos de <br className="hidden laptop:block" />
+              Pensamiento <br className="hidden laptop:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#22D3EE] to-[#67E8F9]">
-                opinión y análisis
+                complejo
               </span>
             </h1>
 
@@ -30,21 +27,21 @@ export default function ArticulosHero() {
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-[24px] p-6 laptop:p-8 desktop:p-10 hover:bg-white/10 transition-all duration-300 group">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-xs laptop:text-[14px] font-semibold text-[#22D3EE] uppercase tracking-wider">
-                  {FEATURED_ARTICLE.categoria}
+                  {featuredNote.categoria?.nombre || "Pensamiento Complejo"}
                 </span>
                 <span className="text-white/30">•</span>
                 <span className="text-xs laptop:text-[14px] text-white/50">
-                  {FEATURED_ARTICLE.fecha}
+                  {featuredNote.fecha_publicacion ? formatDate(featuredNote.fecha_publicacion) : ""}
                 </span>
               </div>
               <h2 className="text-xl laptop:text-[28px] desktop:text-[32px] font-bold leading-tight tracking-tight text-white mb-3 laptop:mb-4 group-hover:text-[#22D3EE] transition-colors line-clamp-2">
-                {FEATURED_ARTICLE.titulo}
+                {featuredNote.titulo}
               </h2>
               <p className="text-white/60 text-sm laptop:text-[17px] leading-relaxed mb-6 line-clamp-3">
-                {FEATURED_ARTICLE.extracto}
+                {featuredNote.extracto}
               </p>
               <Link
-                href={`/articulando/${FEATURED_ARTICLE.slug}`}
+                href={`/articulando/${featuredNote.slug}`}
                 className="inline-flex items-center gap-2 text-[#22D3EE] font-semibold text-sm laptop:text-[16px] hover:gap-4 transition-all duration-200"
               >
                 Leer artículo completo
@@ -58,19 +55,23 @@ export default function ArticulosHero() {
           <div className="flex flex-col items-center shrink-0 order-1 laptop:order-2">
             <div className="relative">
               <div className="relative w-[200px] h-[200px] laptop:w-[270px] laptop:h-[270px] desktop:w-[340px] desktop:h-[340px] rounded-full overflow-hidden border-4 border-[#22D3EE] shadow-[0_0_60px_rgba(6,182,212,0.3)] bg-gradient-to-br from-[#06B6D4] via-[#0891B2] to-[#0E7490] flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-white/20 laptop:w-[120px] laptop:h-[120px] desktop:w-[140px] desktop:h-[140px]">
-                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                </svg>
+                {avatarUrl ? (
+                  <Image src={avatarUrl} alt={autorNombre} fill className="object-cover" />
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-white/20 laptop:w-[120px] laptop:h-[120px] desktop:w-[140px] desktop:h-[140px]">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                  </svg>
+                )}
               </div>
             </div>
 
             <div className="mt-5 flex flex-col items-center text-center">
               <span className="text-white font-bold text-lg laptop:text-[22px] desktop:text-[26px] tracking-tight">
-                Biblioteca ESCP
+                {autorNombre}
               </span>
               <span className="text-[#22D3EE] font-medium text-sm laptop:text-[16px] desktop:text-[18px] mt-1">
-                Artículos académicos
+                {featuredNote.autor?.cargo || "Artículos académicos"}
               </span>
             </div>
 

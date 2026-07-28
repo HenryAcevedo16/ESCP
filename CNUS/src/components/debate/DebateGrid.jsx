@@ -3,70 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, MessageCircle, Users, Clock } from "lucide-react";
-
-const PAST_DEBATES = [
-  {
-    id: 1,
-    pregunta: "¿Es efectiva la huelga como herramienta de presión en el contexto laboral actual?",
-    fecha: "julio 2026",
-    respuestas: 312,
-    participantes: 198,
-    status: "cerrado",
-    slug: "efectividad-huelga-herramienta-presion",
-  },
-  {
-    id: 2,
-    pregunta: "¿Debería regularse el trabajo en plataformas digitales como Uber y Rappi?",
-    fecha: "junio 2026",
-    respuestas: 289,
-    participantes: 176,
-    status: "cerrado",
-    slug: "regulacion-trabajo-plataformas-digitales",
-  },
-  {
-    id: 3,
-    pregunta: "¿La reforma de pensiones debe incluir un pilar solidario financiado por el Estado?",
-    fecha: "mayo 2026",
-    respuestas: 245,
-    participantes: 162,
-    status: "cerrado",
-    slug: "reforma-pensiones-pilar-solidario",
-  },
-  {
-    id: 4,
-    pregunta: "¿El teletrabajo debe regularse por ley sectorial o por convenio colectivo?",
-    fecha: "abril 2026",
-    respuestas: 198,
-    participantes: 134,
-    status: "cerrado",
-    slug: "teletrabajo-ley-sectorial-convenio-colectivo",
-  },
-  {
-    id: 5,
-    pregunta: "¿Es necesario un salario mínimo diferenciado por sectores económicos?",
-    fecha: "marzo 2026",
-    respuestas: 267,
-    participantes: 181,
-    status: "cerrado",
-    slug: "salario-minimo-diferenciado-sectores",
-  },
-  {
-    id: 6,
-    pregunta: "¿Debe el Estado asumir un rol más activo en la formación sindical?",
-    fecha: "febrero 2026",
-    respuestas: 156,
-    participantes: 112,
-    status: "cerrado",
-    slug: "estado-rol-activo-formacion-sindical",
-  },
-];
+import CommunityCTA from "./CommunityCTA";
 
 const ITEMS_PER_PAGE = 6;
 
 function DebateCard({ debate }) {
   return (
     <Link
-      href={`/articulando/${debate.slug}`}
+      href={`/articulando/debate/${debate.slug}`}
       className="group flex flex-col bg-white border border-[#E8ECF0] rounded-[20px] laptop:rounded-[28px] overflow-hidden hover:shadow-[0_12px_48px_rgba(5,22,45,0.10)] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
     >
       {/* Color accent top bar */}
@@ -77,14 +21,14 @@ function DebateCard({ debate }) {
         {/* Meta row */}
         <div className="flex items-center gap-2 flex-wrap mb-4">
           <span className={`inline-block text-[11px] laptop:text-[13px] font-semibold px-3 py-1 rounded-full ${
-            debate.status === "activo"
+            debate.activo
               ? "bg-green-100 text-green-700"
               : "bg-[#F0F2F5] text-[#777C82]"
           }`}>
-            {debate.status === "activo" ? "Activo" : "Cerrado"}
+            {debate.activo ? "Activo" : "Cerrado"}
           </span>
           <span className="text-[#A0A4A8] text-[11px] laptop:text-[13px] flex items-center gap-1">
-            <MessageCircle size={12} /> {debate.respuestas}
+            <MessageCircle size={12} /> {debate.respuestas || 0}
           </span>
         </div>
 
@@ -99,7 +43,7 @@ function DebateCard({ debate }) {
         {/* Footer */}
         <div className="flex items-center justify-between mt-5 pt-4 border-t border-[#F0F2F5]">
           <span className="text-[#777C82] text-xs laptop:text-[14px]">
-            {debate.fecha}
+            {debate.fecha_cierre || new Date().toLocaleDateString()}
           </span>
           <span className="flex items-center gap-1 text-[#0891B2] font-semibold text-xs laptop:text-[14px] opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             Leer
@@ -113,12 +57,12 @@ function DebateCard({ debate }) {
   );
 }
 
-export default function DebateGrid() {
+export default function DebateGrid({ debates = [] }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(PAST_DEBATES.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(debates.length / ITEMS_PER_PAGE);
 
   const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
-  const visibleDebates = PAST_DEBATES.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+  const visibleDebates = debates.slice(startIdx, startIdx + ITEMS_PER_PAGE);
 
   const handlePage = (page) => {
     setCurrentPage(page);
@@ -136,14 +80,14 @@ export default function DebateGrid() {
           </h2>
         </div>
         <span className="text-[#777C82] text-sm laptop:text-[16px]">
-          {PAST_DEBATES.length} debates
+          {debates.length} debates
         </span>
       </div>
 
       {/* Cards grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 laptop:grid-cols-3 gap-5 laptop:gap-6 desktop:gap-8 mb-12 laptop:mb-16">
         {visibleDebates.map((debate) => (
-          <DebateCard key={debate.id} debate={debate} />
+          <DebateCard key={debate.id || debate.documentId} debate={debate} />
         ))}
       </div>
 
@@ -189,17 +133,9 @@ export default function DebateGrid() {
         </div>
       )}
 
-      {/* Community CTA (Restored style from previous DebateGrid) */}
-      <div className="mt-16 laptop:mt-20 bg-gradient-to-r from-[#0A1628] via-[#1A2D5A] to-[#0A1628] rounded-[28px] p-8 laptop:p-12 text-center">
-        <h3 className="text-2xl laptop:text-[32px] font-bold text-white mb-4">
-          ¿Tienes un tema para debatir?
-        </h3>
-        <p className="text-white/60 text-sm laptop:text-[16px] max-w-[600px] mx-auto mb-6">
-          Propón un tema de discusión y la comunidad votará para incluirlo en nuestros próximos debates.
-        </p>
-        <button className="h-[52px] px-8 bg-[#06B6D4] hover:bg-[#0891B2] text-white font-semibold text-[15px] rounded-full transition-all">
-          Proponer tema
-        </button>
+      {/* Community CTA */}
+      <div className="mt-[100px]">
+        <CommunityCTA />
       </div>
 
     </section>

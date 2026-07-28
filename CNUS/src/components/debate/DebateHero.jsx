@@ -3,13 +3,6 @@
 import { useState } from "react";
 import { Play, ChevronDown, MessageCircle } from "lucide-react";
 
-const ACTIVE_DEBATE = {
-  pregunta: "¿Debería el salario mínimo en República Dominicana indexarse automáticamente a la inflación?",
-  contexto: "Actualmente el salario mínimo se revisa cada dos años mediante negociación tripartita. Sectores sindicales proponen una indexación automática que garantice el poder adquisitivo, mientras que sectores empresariales advierten sobre el impacto en la generación de empleo.",
-  respuestas: 247,
-  participantes: 184,
-};
-
 const sampleComments = [
   { nombre: "María", apellido: "Fernández", texto: "Es una medida necesaria y de justicia básica. Llevamos años perdiendo poder adquisitivo mientras la canasta básica no deja de subir.", likes: 45, created_at: "2026-07-24T10:00:00Z", color: "bg-[#0E52C6]" },
   { nombre: "Carlos", apellido: "Mejía", texto: "La indexación automática tiene ventajas pero también riesgos. Podría generar rigidez salarial. Una fórmula mixta sería más equilibrada.", likes: 32, created_at: "2026-07-23T15:30:00Z", color: "bg-[#E05A2B]" },
@@ -17,12 +10,18 @@ const sampleComments = [
   { nombre: "Roberto", apellido: "Díaz", texto: "Los países que han implementado indexación muestran resultados mixtos. El diseño institucional es clave.", likes: 19, created_at: "2026-07-21T14:00:00Z", color: "bg-[#9B59B6]" },
 ];
 
-export default function DebateHero() {
+export default function DebateHero({ activeDebate }) {
   const [playing, setPlaying] = useState(false);
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [texto, setTexto] = useState("");
   const [success, setSuccess] = useState(false);
+
+  // Use real data from Strapi if available, otherwise show nothing
+  const pregunta = activeDebate?.pregunta;
+  const contexto = activeDebate?.contexto;
+  const participantes = activeDebate?.participantes ?? sampleComments.length;
+  const respuestas = activeDebate?.respuestas ?? sampleComments.length;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,11 +57,13 @@ export default function DebateHero() {
                     Debate del momento
                   </div>
                   <h1 className="text-white text-xl laptop:text-3xl desktop:text-4xl font-bold leading-tight max-w-3xl">
-                    {ACTIVE_DEBATE.pregunta}
+                    {pregunta}
                   </h1>
-                  <p className="text-white/50 text-sm laptop:text-base mt-3 max-w-2xl line-clamp-2">
-                    {ACTIVE_DEBATE.contexto}
-                  </p>
+                  {contexto && (
+                    <p className="text-white/50 text-sm laptop:text-base mt-3 max-w-2xl line-clamp-2">
+                      {contexto}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -73,9 +74,9 @@ export default function DebateHero() {
           )}
 
           <div className="absolute top-4 right-4 flex items-center gap-3 bg-black/40 backdrop-blur rounded-full px-4 py-2 border border-white/10">
-            <span className="text-white/70 text-xs"><strong className="text-white">{ACTIVE_DEBATE.participantes}</strong> participando</span>
+            <span className="text-white/70 text-xs"><strong className="text-white">{participantes}</strong> participando</span>
             <span className="w-px h-3 bg-white/20" />
-            <span className="text-white/70 text-xs"><strong className="text-white">{ACTIVE_DEBATE.respuestas}</strong> opiniones</span>
+            <span className="text-white/70 text-xs"><strong className="text-white">{respuestas}</strong> opiniones</span>
           </div>
         </div>
       </section>

@@ -15,6 +15,22 @@
       "type": "string",
       "required": true
     },
+    "slug": {
+      "type": "uid",
+      "targetField": "pregunta",
+      "required": true
+    },
+    "contexto": {
+      "type": "text"
+    },
+    "participantes": {
+      "type": "integer",
+      "default": 0
+    },
+    "respuestas": {
+      "type": "integer",
+      "default": 0
+    },
     "activo": {
       "type": "boolean",
       "default": false

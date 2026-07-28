@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -46,13 +46,13 @@ export default function DialogandoWithPoll({ id, sectionTitle, mainArticle, deba
         {/* Artículo principal */}
         {mainArticle && (
           <div className="flex flex-col w-full laptop:w-[55%] desktop:w-[970px] shrink-0">
-            <div className="w-full flex-1 min-h-[240px] sm:min-h-[350px] laptop:min-h-[400px] desktop:min-h-[520px] rounded-[20px] md:rounded-[40px] overflow-hidden relative mb-4 laptop:mb-3 desktop:mb-6 bg-[#05162D]">
+            <Link href={debate ? `/articulando/debate/${debate.slug}` : `/articulando/${mainArticle.slug}`} className="w-full flex-1 min-h-[240px] sm:min-h-[350px] laptop:min-h-[400px] desktop:min-h-[520px] rounded-[20px] md:rounded-[40px] overflow-hidden relative mb-4 laptop:mb-3 desktop:mb-6 bg-[#05162D] block group cursor-pointer">
               {imageUrl ? (
                 <Image
                   src={imageUrl}
                   alt={mainArticle.titulo}
                   fill
-                  className="object-cover hover:scale-105 transition duration-500"
+                  className="object-cover group-hover:scale-105 transition duration-500"
                 />
               ) : (
                 <div className="absolute inset-0 bg-gradient-to-br from-[#0E52C6] via-[#043F9F] to-[#05162D] flex items-center justify-center">
@@ -61,7 +61,7 @@ export default function DialogandoWithPoll({ id, sectionTitle, mainArticle, deba
                   </span>
                 </div>
               )}
-            </div>
+            </Link>
             <div className="flex flex-col px-1 md:px-2 shrink-0">
               <div className="flex items-center gap-3 mb-2 laptop:mb-1 md:mb-3">
                 {mainArticle.categoria?.nombre && (
@@ -78,7 +78,7 @@ export default function DialogandoWithPoll({ id, sectionTitle, mainArticle, deba
                   </span>
                 )}
               </div>
-              <Link href={`/articulando/${mainArticle.slug}`}>
+              <Link href={debate ? `/articulando/debate/${debate.slug}` : `/articulando/${mainArticle.slug}`}>
                 <h3 className="text-xl laptop:text-[24px] desktop:text-[34px] font-bold text-[#05162D] leading-tight hover:text-[#043F9F] transition cursor-pointer tracking-tight mb-2 laptop:mb-1 md:mb-3 line-clamp-2">
                   {mainArticle.titulo}
                 </h3>
@@ -152,3 +152,4 @@ export default function DialogandoWithPoll({ id, sectionTitle, mainArticle, deba
     </section>
   );
 }
+

@@ -5,7 +5,7 @@ const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN || '';
  * Función base de fetch hacia Strapi.
  * Retorna null si Strapi no está disponible (no rompe el sitio).
  */
-async function fetchStrapi(path, options = {}) {
+async function fetchStrapi(path, options = {}, tags = []) {
   const url = `${STRAPI_URL}/api/${path}`;
   try {
     const res = await fetch(url, {
@@ -13,7 +13,10 @@ async function fetchStrapi(path, options = {}) {
         'Content-Type': 'application/json',
         ...(STRAPI_TOKEN && { Authorization: `Bearer ${STRAPI_TOKEN}` }),
       },
-      next: { revalidate: 60 },
+      next: {
+        revalidate: 60,
+        ...(tags.length > 0 && { tags }),
+      },
       ...options,
     });
     if (!res.ok) return null;
@@ -21,6 +24,31 @@ async function fetchStrapi(path, options = {}) {
     return json?.data ?? null;
   } catch {
     return null;
+  }
+}
+
+/**
+ * Versión de fetchStrapi que también devuelve metadatos de paginación.
+ */
+async function fetchStrapiWithMeta(path, options = {}, tags = []) {
+  const url = `${STRAPI_URL}/api/${path}`;
+  try {
+    const res = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        ...(STRAPI_TOKEN && { Authorization: `Bearer ${STRAPI_TOKEN}` }),
+      },
+      next: {
+        revalidate: 60,
+        ...(tags.length > 0 && { tags }),
+      },
+      ...options,
+    });
+    if (!res.ok) return { data: null, meta: null };
+    const json = await res.json();
+    return { data: json?.data ?? null, meta: json?.meta ?? null };
+  } catch {
+    return { data: null, meta: null };
   }
 }
 
@@ -68,7 +96,9 @@ export async function getArticulos(limit = 4) {
     `articulos?sort=fecha_publicacion:desc&pagination[limit]=${limit}` +
     `&populate[imagen_portada][populate]=*` +
     `&populate[autor][populate]=*` +
-    `&populate[categoria][populate]=*`
+    `&populate[categoria][populate]=*`,
+    {},
+    ['articulos']
   );
 }
 
@@ -79,7 +109,9 @@ export async function getArticuloPorSlug(slug) {
     `&populate[autor][populate]=*` +
     `&populate[categoria][populate]=*` +
     `&populate[tags][populate]=*` +
-    `&populate[articulos_relacionados][populate][imagen_portada][populate]=*`
+    `&populate[articulos_relacionados][populate][imagen_portada][populate]=*`,
+    {},
+    ['articulos']
   );
 }
 
@@ -87,21 +119,51 @@ export async function getArticuloDestacado() {
   return fetchStrapi(
     'articulos?filters[destacado][$eq]=true&sort=fecha_publicacion:desc&pagination[limit]=1' +
     `&populate[imagen_portada][populate]=*` +
-    `&populate[categoria][populate]=*`
+    `&populate[categoria][populate]=*`,
+    {},
+    ['articulos']
   );
 }
 
+/**
+ * Obtiene artículos de una categoría con paginación server-side.
+ * @param {string} categoriaSlug
+ * @param {number} page - Página actual (1-indexed)
+ * @param {number} pageSize - Artículos por página
+ * @returns {{ data: Article[], total: number, pageCount: number }}
+ */
+export async function getArticulosPorCategoriaPaginado(categoriaSlug, page = 1, pageSize = 6) {
+  const { data, meta } = await fetchStrapiWithMeta(
+    `articulos?filters[categoria][slug][$eq]=${encodeURIComponent(categoriaSlug)}` +
+    `&sort=fecha_publicacion:desc` +
+    `&pagination[page]=${page}&pagination[pageSize]=${pageSize}` +
+    `&populate[imagen_portada][populate]=*` +
+    `&populate[autor][populate]=*` +
+    `&populate[categoria][populate]=*`,
+    {},
+    ['articulos']
+  );
+  return {
+    data: Array.isArray(data) ? data : [],
+    total: meta?.pagination?.total ?? 0,
+    pageCount: meta?.pagination?.pageCount ?? 1,
+  };
+}
+
+/** Versión simple (sin meta) — usada en el Home para previews */
 export async function getArticulosPorCategoria(categoriaSlug, limit = 4) {
   return fetchStrapi(
     `articulos?filters[categoria][slug][$eq]=${encodeURIComponent(categoriaSlug)}&sort=fecha_publicacion:desc&pagination[limit]=${limit}` +
     `&populate[imagen_portada][populate]=*` +
     `&populate[autor][populate]=*` +
-    `&populate[categoria][populate]=*`
+    `&populate[categoria][populate]=*`,
+    {},
+    ['articulos']
   );
 }
 
 export async function getAllArticuloSlugs() {
-  const data = await fetchStrapi('articulos?fields[0]=slug&pagination[pageSize]=1000');
+  const data = await fetchStrapi('articulos?fields[0]=slug&pagination[pageSize]=1000', {}, ['articulos']);
   if (!Array.isArray(data)) return [];
   return data.map((item) => ({ slug: item.slug }));
 }
@@ -115,7 +177,21 @@ export async function getCategorias() {
 export async function getDebateActivo() {
   return fetchStrapi(
     'debates?filters[activo][$eq]=true&pagination[limit]=1' +
-    `&populate[articulo_relacionado][populate][imagen_portada][populate]=*`
+    `&populate[articulo_relacionado][populate][imagen_portada][populate]=*`,
+    {},
+    ['debates']
+  );
+}
+
+export async function getDebates() {
+  return fetchStrapi('debates?sort=createdAt:desc', {}, ['debates']);
+}
+
+export async function getDebatePorSlug(slug) {
+  return fetchStrapi(
+    `debates?filters[slug][$eq]=${encodeURIComponent(slug)}`,
+    {},
+    ['debates']
   );
 }
 

@@ -11,6 +11,7 @@ import {
   getStrapiImageUrl,
   formatDate,
   getAutorNombre,
+  getArticulosPorCategoria,
 } from "@/lib/strapi";
 import { getComentarios } from "@/lib/supabase";
 
@@ -52,9 +53,14 @@ export default async function ArticlePage({ params }) {
   const autorNombre = getAutorNombre(article.autor);
   const portadaUrl = getStrapiImageUrl(article.imagen_portada);
   const avatarUrl = getStrapiImageUrl(article.autor?.avatar);
-  const relacionados = Array.isArray(article.articulos_relacionados)
-    ? article.articulos_relacionados
-    : [];
+  let relacionados = [];
+
+  if (article.categoria?.slug) {
+    const catArts = await getArticulosPorCategoria(article.categoria.slug, 5);
+    if (Array.isArray(catArts)) {
+      relacionados = catArts.filter((a) => a.slug !== slug).slice(0, 4);
+    }
+  }
 
   return (
     <main className="flex min-h-screen flex-col w-full overflow-hidden bg-white">

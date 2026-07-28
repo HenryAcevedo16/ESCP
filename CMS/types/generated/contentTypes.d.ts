@@ -565,6 +565,7 @@ export interface ApiDebateDebate extends Struct.CollectionTypeSchema {
       'manyToOne',
       'api::articulo.articulo'
     >;
+    contexto: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -575,8 +576,11 @@ export interface ApiDebateDebate extends Struct.CollectionTypeSchema {
       'api::debate.debate'
     > &
       Schema.Attribute.Private;
+    participantes: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     pregunta: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    respuestas: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    slug: Schema.Attribute.UID<'pregunta'> & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

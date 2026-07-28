@@ -14,14 +14,16 @@ export default async function ArticulandoPage() {
     destacadosData,
     debateData,
     notasPresidenteData,
-    noticiasData,
-    articulosData,
+    pensamientoComplejoData,
+    columnaDirectorData,
+    noticiasEventosData,
   ] = await Promise.all([
     getArticuloDestacado(),
     getDebateActivo(),
     getArticulosPorCategoria("notas-del-presidente", 4),
-    getArticulosPorCategoria("noticias", 4),
-    getArticulosPorCategoria("articulos", 4),
+    getArticulosPorCategoria("pensamiento-complejo", 4),
+    getArticulosPorCategoria("columna-del-director", 4),
+    getArticulosPorCategoria("noticias-y-eventos", 4),
   ]);
 
   const articuloDestacado = Array.isArray(destacadosData) ? destacadosData[0] : null;
@@ -30,10 +32,15 @@ export default async function ArticulandoPage() {
   // El artículo principal del debate viene del debate mismo (si tiene uno asociado)
   const articuloDebate = debate?.articulo_relacionado ?? articuloDestacado ?? null;
 
-  // Separar artículo principal y secundarios para CategoryGrid
+  // Separar artículo principal y secundarios para Notas del Presidente
   const notasPresidente = Array.isArray(notasPresidenteData) ? notasPresidenteData : [];
   const mainNota = notasPresidente[0] ?? null;
   const secundariasNota = notasPresidente.slice(1);
+
+  // Separar artículo principal y secundarios para Columna del Director
+  const columnaDirector = Array.isArray(columnaDirectorData) ? columnaDirectorData : [];
+  const mainColumna = columnaDirector[0] ?? null;
+  const secundariasColumna = columnaDirector.slice(1);
 
   return (
     <main className="flex min-h-screen flex-col w-full bg-white">
@@ -46,12 +53,15 @@ export default async function ArticulandoPage() {
         slug={articuloDestacado?.slug}
       />
       <div className="flex flex-col pt-0 gap-[200px] pb-[200px]">
+        {/* 1. Debate */}
         <DialogandoWithPoll
           id="debate"
           sectionTitle="Debate"
           mainArticle={articuloDebate}
           debate={debate}
         />
+        
+        {/* 2. Notas del presidente */}
         <CategoryGrid
           id="notas-del-presidente"
           sectionTitle="Notas del presidente"
@@ -59,18 +69,31 @@ export default async function ArticulandoPage() {
           secondaryArticles={secundariasNota}
           verTodasHref="/articulando/notas-del-presidente"
         />
-        <CategoryRow
-          id="noticias-y-eventos"
-          sectionTitle="Noticias"
-          categoryArticles={Array.isArray(noticiasData) ? noticiasData : []}
-          verTodasHref="/articulando/noticias"
-        />
+
+        {/* 3. Pensamiento complejo (CategoryRow) */}
         <CategoryRow
           id="pensamiento-complejo"
-          sectionTitle="Artículos"
-          categoryArticles={Array.isArray(articulosData) ? articulosData : []}
+          sectionTitle="Pensamiento complejo"
+          categoryArticles={Array.isArray(pensamientoComplejoData) ? pensamientoComplejoData : []}
+          verTodasHref="/articulando/pensamiento-complejo"
+        />
+
+        {/* 4. Columna del director (CategoryGrid) */}
+        <CategoryGrid
+          id="columna-del-director"
+          sectionTitle="Columna del director"
+          mainArticle={mainColumna}
+          secondaryArticles={secundariasColumna}
+          verTodasHref="/articulando/columna-del-director"
+        />
+
+        {/* 5. Noticias y eventos (CategoryRow) */}
+        <CategoryRow
+          id="noticias-y-eventos"
+          sectionTitle="Noticias y eventos"
+          categoryArticles={Array.isArray(noticiasEventosData) ? noticiasEventosData : []}
           bgColor="bg-white"
-          verTodasHref="/articulando/articulos"
+          verTodasHref="/articulando/noticias-y-eventos"
         />
       </div>
     </main>

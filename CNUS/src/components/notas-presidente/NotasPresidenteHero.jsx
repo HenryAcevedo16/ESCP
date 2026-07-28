@@ -1,17 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import { formatDate, getAutorNombre, getStrapiImageUrl } from "@/lib/strapi";
 
-const FEATURED_NOTE = {
-  id: 1,
-  titulo: "El sindicalismo dominicano como fuerza transformadora del siglo XXI",
-  extracto:
-    "En este comunicado reflexiono sobre el rol histórico que han jugado las organizaciones sindicales en la construcción de una sociedad más justa, y el desafío que enfrentamos hoy para adaptarnos a los cambios del mundo del trabajo sin perder nuestra esencia.",
-  fecha: "20 de julio de 2026",
-  categoria: "Notas del Presidente",
-  slug: "sindicalismo-dominicano-fuerza-transformadora",
-};
+export default function NotasPresidenteHero({ featuredNote }) {
+  if (!featuredNote) return null;
 
-export default function NotasPresidenteHero() {
+  const autorNombre = getAutorNombre(featuredNote.autor) || "Rafael Peña Rodríguez";
+  const avatarUrl = getStrapiImageUrl(featuredNote.autor?.avatar);
+
   return (
     <section className="relative w-full overflow-hidden bg-gradient-to-br from-[#05162D] via-[#1A2A3A] to-[#2D4A5E] mb-16 laptop:mb-32 desktop:mb-50">
       {/* Top decorative bar */}
@@ -35,21 +31,21 @@ export default function NotasPresidenteHero() {
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-[24px] p-6 laptop:p-8 desktop:p-10 hover:bg-white/10 transition-all duration-300 group">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-xs laptop:text-[14px] font-semibold text-[#22D3EE] uppercase tracking-wider">
-                  {FEATURED_NOTE.categoria}
+                  {featuredNote.categoria?.nombre || "Notas del Presidente"}
                 </span>
                 <span className="text-white/30">•</span>
                 <span className="text-xs laptop:text-[14px] text-white/50">
-                  {FEATURED_NOTE.fecha}
+                  {featuredNote.fecha_publicacion ? formatDate(featuredNote.fecha_publicacion) : ""}
                 </span>
               </div>
               <h2 className="text-xl laptop:text-[28px] desktop:text-[32px] font-bold leading-tight tracking-tight text-white mb-3 laptop:mb-4 group-hover:text-[#22D3EE] transition-colors line-clamp-2">
-                {FEATURED_NOTE.titulo}
+                {featuredNote.titulo}
               </h2>
               <p className="text-white/60 text-sm laptop:text-[17px] leading-relaxed mb-6 line-clamp-3">
-                {FEATURED_NOTE.extracto}
+                {featuredNote.extracto}
               </p>
               <Link
-                href={`/articulando/${FEATURED_NOTE.slug}`}
+                href={`/articulando/${featuredNote.slug}`}
                 className="inline-flex items-center gap-2 text-[#22D3EE] font-semibold text-sm laptop:text-[16px] hover:gap-4 transition-all duration-200"
               >
                 Leer nota completa
@@ -64,17 +60,20 @@ export default function NotasPresidenteHero() {
           <div className="flex flex-col items-center shrink-0 relative order-1 laptop:order-2">
             {/* Portrait circle */}
             <div className="relative w-[200px] h-[200px] laptop:w-[270px] laptop:h-[270px] desktop:w-[340px] desktop:h-[340px] rounded-full overflow-hidden border-4 border-[#22D3EE] shadow-[0_0_60px_rgba(6,182,212,0.3)] bg-gradient-to-br from-[#06B6D4] via-[#0891B2] to-[#0E7490] flex items-center justify-center shrink-0">
-              {/* Placeholder monogram since no photo is available */}
-              <span className="text-white/10 text-[120px] laptop:text-[160px] font-black leading-none select-none">P</span>
+              {avatarUrl ? (
+                <Image src={avatarUrl} alt={autorNombre} fill className="object-cover" />
+              ) : (
+                <span className="text-white/10 text-[120px] laptop:text-[160px] font-black leading-none select-none">P</span>
+              )}
             </div>
 
             {/* Name tag */}
             <div className="mt-5 flex flex-col items-center text-center">
               <span className="text-white font-bold text-lg laptop:text-[22px] desktop:text-[26px] tracking-tight">
-                Rafael Peña Rodríguez
+                {autorNombre}
               </span>
               <span className="text-[#22D3EE] font-medium text-sm laptop:text-[16px] desktop:text-[18px] mt-1">
-                Presidente — ESCP
+                {featuredNote.autor?.cargo || "Presidente — ESCP"}
               </span>
             </div>
           </div>
